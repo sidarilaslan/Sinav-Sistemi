@@ -9,8 +9,8 @@
   <!-- Bootstrap core CSS -->
   <link href="../../src/css/bootstrap.min.css" rel="stylesheet">
 
-
   <link href="login.css" rel="stylesheet">
+
 </head>
 
 <body class="text-center">
@@ -32,17 +32,82 @@
         <label>
           <input type="checkbox" value="remember-me"> Beni hatırla
         </label>
-        <a href="#" class="text-decoration-none">Şifremi unuttum</a>
+
+        <a href="#" class="text-decoration-none" id="btnForgetPassword">Şifremi Unuttum</a>
+
       </div>
       <button class="w-100 btn btn-lg btn-primary" type="submit">Giriş yap</button>
       <p class="mt-5 mb-3 text-muted">&copy; 2022–2023</p>
     </form>
   </main>
 
+  <div class="forgetPassword fade" id="validationModal">
+    <div class="forgetPasswordContainer col-md-3">
+      <button type="button" class="btn-close" id="btnCloseValidationModal" aria-label="Close"></button>
+      <form>
+        <div class="form-floating mb-4">
+          <input type="email" class="form-control" id="floatingInput1" placeholder="name@example.com">
+          <label for="floatingInput1">Email adresi</label>
+        </div>
+        <div class="form-floating mb-4">
+          <input type="text" class="form-control" id="floatingInput2" placeholder="TC">
+          <label for="floatingInput2">TC</label>
+        </div>
+
+        <button class="w-100 btn btn-lg btn-primary form-floating mb-4" id="btnConfirmForgetPassword"
+          type="submit">Doğrula</button>
+      </form>
+    </div>
+  </div>
+  <div class="forgetPassword setPasswordModal fade" id="setPasswordModal">
+    <div class="forgetPasswordContainer col-md-3">
+      <button type="button" class="btn-close" id="btnCloseSetPasswordModal" aria-label="Close"></button>
+      <form>
+        <div class="form-floating mb-4">
+          <input type="password" class="form-control" id="floatingInput1" placeholder="Parola">
+          <label for="floatingInput1">Parola</label>
+        </div>
+        <div class="form-floating mb-4">
+          <input type="password" class="form-control" id="floatingInput2" placeholder="Parola">
+          <label for="floatingInput2">Parolayı Yeniden Girin</label>
+        </div>
+
+        <button class="w-100 btn btn-lg btn-primary form-floating mb-4" id="btnConfirmSetPassword"
+          type="submit">Tamamla</button>
+      </form>
+    </div>
+  </div>
 
 
 
-  <script src="/src/js/jquery-3.6.0.min.js"></script>
+  <script src="/src/js/jquery-3.6.0.min.js">
+  </script>
+  <script>
+    function toggleClass(id, addClass, removeClass) {
+      $(id).addClass(addClass).removeClass(removeClass);
+    }
+
+    $('#btnForgetPassword').click(function () {
+      toggleClass('#validationModal', 'show', 'fade');
+    })
+    $('#btnCloseValidationModal').click(function () {
+      toggleClass('#validationModal', 'fade', 'show');
+    })
+
+    $('#btnConfirmForgetPassword').click(function () {
+      $('#btnCloseValidationModal').click();
+      toggleClass('#setPasswordModal', 'show', 'fade');
+    })
+
+    $('#btnCloseSetPasswordModal').click(function () {
+      toggleClass('#setPasswordModal', 'fade', 'show');
+    })
+
+    $('#btnConfirmSetPassword').click(function () {
+      $('#btnCloseSetPasswordModal').click();
+      alert("Parola güncelleme başarılı.");
+    })
+  </script>
 
 </body>
 

@@ -45,3 +45,49 @@ body {
     transform: scale(1.1);
   }
 }
+
+.forgetPassword {
+  &.setPasswordModal {
+    animation: none !important;
+  }
+
+  &.show {
+    display: flex;
+    opacity: 1;
+    animation: opacity 0.3s;
+
+    @keyframes opacity {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+  }
+
+  position: absolute;
+  top:0;
+  left: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  .forgetPasswordContainer {
+    padding: 60px 30px;
+    background: white;
+    position: relative;
+    border-radius: 2%;
+
+    .btn-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+  }
+}
