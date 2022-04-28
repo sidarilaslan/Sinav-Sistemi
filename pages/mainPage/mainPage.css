@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  background-color: #f5f5f5;
+}
+
+nav {
+  background-color: #404041;
+  position: fixed;
+  width: 200px;
+  height: 100%;
+}
+
+nav .profile-wrapper {
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid rgba(150, 150, 150, 0.5);
+}
+
+nav .profile-wrapper .profile-mask {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+}
+
+nav .profile-wrapper .profile-mask img {
+  width: 100%;
+  height: 100%;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+nav .profile-wrapper .profile-mask img:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+nav .item-list {
+  height: inherit;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 0 !important;
+}
+
+nav .item-list .list-item {
+  list-style-type: none;
+  padding-left: 0 !important;
+}
+
+nav .item-list .list-item a {
+  height: auto;
+  padding: 5%;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+  display: inline-block;
+  width: 100%;
+  color: #fff;
+}
+
+nav .item-list .list-item a:hover {
+  color: #404041;
+  background-color: #fff;
+}
+/*# sourceMappingURL=mainPage.css.map */
