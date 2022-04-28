@@ -1,7 +1,6 @@
 nav {
   background-color: #404041;
   position: fixed;
-  width: 200px;
   height: 100%;
 }
 
@@ -41,20 +40,7 @@ nav .profile-wrapper .profile-mask img:hover {
 }
 
 nav .item-list {
-  height: inherit;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  padding: 0 !important;
-}
-
-nav .item-list .list-item {
-  list-style-type: none;
-  padding-left: 0 !important;
+  height: calc(100% - 120px);
 }
 
 nav .item-list .list-item a {
@@ -71,5 +57,10 @@ nav .item-list .list-item a {
 nav .item-list .list-item a:hover {
   color: #404041;
   background-color: #fff;
+}
+
+.body {
+  height: 100vh;
+  margin-left: auto;
 }
 /*# sourceMappingURL=navbar.css.map */

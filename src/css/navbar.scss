@@ -9,16 +9,12 @@ nav {
 
     background-color: #404041;
     position: fixed;
-    width: 200px;
     height: 100%;
-
-
 
     .profile-wrapper {
         width: 100%;
         text-align: center;
         padding: 10px;
-
 
         .profile-mask {
             width: 100px;
@@ -27,7 +23,6 @@ nav {
             border-radius: 50%;
             display: block;
             margin: 0 auto;
-
 
             img {
                 width: 100%;
@@ -47,15 +42,9 @@ nav {
 
 
     .item-list {
-        height: inherit;
-        display: flex;
-        flex-direction: column;
-        padding: 0 !important;
+        height: calc(100% - 120px);
 
         .list-item {
-            list-style-type: none;
-            padding-left: 0 !important;
-
             a {
                 text-decoration: none;
                 height: auto;
@@ -72,4 +61,9 @@ nav {
             }
         }
     }
+}
+
+.body {
+    height: 100vh;
+    margin-left: auto;
 }
