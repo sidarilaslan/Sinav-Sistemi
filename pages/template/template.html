@@ -24,7 +24,9 @@
     </script>
     <script>
         $(function () {
-            $("#nav-placeholder").load("/src/Components/navbarComponent.html");
+            $("#nav-placeholder").load("/src/Components/navbarComponent.html", function () {
+                $("#nav-placeholder").children().find('.list-item').filter(":contains('Template')").addClass("active");
+            });
         });
     </script>
 </body>
