@@ -54,7 +54,8 @@ nav .item-list .list-item a {
   color: #fff;
 }
 
-nav .item-list .list-item a:hover {
+nav .item-list .list-item a:hover,
+nav .item-list .list-item.active a {
   color: #404041;
   background-color: #fff;
 }
