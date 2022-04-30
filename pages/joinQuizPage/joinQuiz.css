@@ -14,6 +14,9 @@
 .body .card {
   max-width: 400px;
   width: 33%;
+  -webkit-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
+  border: none;
 }
 
 .body .card .card-title {
