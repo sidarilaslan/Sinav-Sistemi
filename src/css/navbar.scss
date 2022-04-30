@@ -53,11 +53,12 @@ nav {
                 display: inline-block;
                 width: 100%;
                 color: #fff;
+            }
 
-                &:hover {
-                    color: #404041;
-                    background-color: #fff;
-                }
+            a:hover,
+            &.active a {
+                color: #404041;
+                background-color: #fff;
             }
         }
     }

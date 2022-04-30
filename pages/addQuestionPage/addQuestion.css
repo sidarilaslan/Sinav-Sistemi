@@ -85,16 +85,29 @@ body {
 }
 
 .question-body .add-question-card .quiz-container .question-item .question-stylish .stylish {
-  margin: 10px 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 100%;
+  margin: 10px 0;
+  border-radius: 50px 0 0 50px;
 }
 
-.question-body .add-question-card .quiz-container .question-item .question-stylish .stylish input {
-  margin-left: 10px;
-  border: none;
+.question-body .add-question-card .quiz-container .question-item .question-stylish .stylish label {
+  padding: 0 10px;
+}
+
+.question-body .add-question-card .quiz-container .question-item .question-stylish .stylish.active {
+  background-color: green;
+}
+
+.question-body .add-question-card .quiz-container .question-item .question-stylish .stylish.active input {
+  border-color: green;
+  -webkit-box-shadow: 0 0 0 0.25rem green;
+          box-shadow: 0 0 0 0.25rem green;
 }
 
 .question-body .add-question-card .quiz-container .question-item .submit-button {
