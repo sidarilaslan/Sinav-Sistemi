@@ -1,0 +1,67 @@
+nav {
+  background-color: #404041;
+  position: fixed;
+  height: 100%;
+}
+
+nav * {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+nav .profile-wrapper {
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid rgba(150, 150, 150, 0.5);
+}
+
+nav .profile-wrapper .profile-mask {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+}
+
+nav .profile-wrapper .profile-mask img {
+  width: 100%;
+  height: 100%;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+nav .profile-wrapper .profile-mask img:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+nav .item-list {
+  height: calc(100% - 120px);
+}
+
+nav .item-list .list-item a {
+  text-decoration: none;
+  height: auto;
+  padding: 5%;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+  display: inline-block;
+  width: 100%;
+  color: #fff;
+}
+
+nav .item-list .list-item a:hover,
+nav .item-list .list-item.active a {
+  color: #404041;
+  background-color: #fff;
+}
+
+.body {
+  height: 100vh;
+  margin-left: auto;
+}
+/*# sourceMappingURL=navbar.css.map */

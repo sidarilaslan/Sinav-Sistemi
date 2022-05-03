@@ -1,0 +1,22 @@
+.body {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 18px;
+
+    .card {
+        max-width: 400px;
+        width: 33%;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
+        border: none;
+
+        .card-title {
+            font-size: 28px;
+        }
+
+        .btn {
+            font-size: 18px;
+        }
+    }
+
+}
