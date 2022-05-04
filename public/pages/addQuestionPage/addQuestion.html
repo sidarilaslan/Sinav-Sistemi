@@ -31,47 +31,43 @@
                             </div>
                             <div class="question-text-area">
                                 <div class="question-subject">
-                                    <select id="inputState" class="form-control">
+                                    <select id="section" class="form-control">
                                         <option selected>Ders Seçiniz</option>
-                                        <option>Matematik</option>
-                                        <option>Kimya</option>
                                     </select>
-                                    <select id="inputState" class="form-control">
+                                    <select id="unit" class="form-control">
                                         <option selected>Konu Seçiniz</option>
-                                        <option>Toplama</option>
-                                        <option>Çıkarma</option>
                                     </select>
                                 </div>
                                 <div class="question-text">
-                                    <textarea class="form-control text-area" rows="7" id="exampleFormControlTextarea1"
+                                    <textarea class="form-control text-area" rows="7" id="questionText"
                                         placeholder="Sorunuzu buraya yazabilirsiniz."></textarea>
                                 </div>
                             </div>
                         </div>
-                        <div class="question-stylish">
+                        <div class="question-stylish" id="answers">
                             <div class="stylish">
                                 <label for="inputPassword3" class="col-form-label">A)</label>
-                                <input type="text" class="form-control" id="inputPassword3"
+                                <input type="text" class="form-control" id="answer0"
                                     placeholder="Şıkkı doldurun.">
                             </div>
                             <div class="stylish">
                                 <label for="inputPassword3" class="col-form-label">B)</label>
-                                <input type="text" class="form-control" id="inputPassword3"
+                                <input type="text" class="form-control" id="answer1"
                                     placeholder="Şıkkı doldurun.">
                             </div>
                             <div class="stylish">
                                 <label for="inputPassword3" class="col-form-label">C)</label>
-                                <input type="text" class="form-control" id="inputPassword3"
+                                <input type="text" class="form-control" id="answer2"
                                     placeholder="Şıkkı doldurun.">
                             </div>
                             <div class="stylish">
                                 <label for="inputPassword3" class="col-form-label">D)</label>
-                                <input type="text" class="form-control" id="inputPassword3"
+                                <input type="text" class="form-control" id="answer3"
                                     placeholder="Şıkkı doldurun.">
                             </div>
                         </div>
                         <div class="submit-button">
-                            <button type="submit" class="btn btn-primary">Ekle</button>
+                            <button type="submit" onclick="addQuestion()" class="btn btn-primary">Ekle</button>
                         </div>
                     </div>
                 </div>
@@ -92,6 +88,9 @@
         $('.question-stylish').on('click', '.stylish', function () {
             $(this).addClass('active').siblings().removeClass('active');
         });
+    </script>
+    <script src="addQuestion.js">
+
     </script>
 </body>
 
