@@ -20,8 +20,7 @@
 
     </nav>
     <div class="col-md-10 body">
-
-        <div class="container">
+        <div class="container users">
             <div class="user-dashboard-info-box table-responsive mb-0">
                 <table class="table manage-candidates-top mb-0">
                     <thead>
@@ -31,8 +30,8 @@
                             <th class="action text-end">Aksiyon</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr class="candidates-list">
+                    <tbody id="usersList">
+                        <!-- <tr class="candidates-list">
                             <td class="title">
                                 <div class="thumb">
                                     <img class="img-fluid" src="https://i.hizliresim.com/ii8tvbv.png" alt="">
@@ -61,70 +60,10 @@
                                     </li>
                                 </ul>
                             </td>
-                        </tr>
-                        <tr class="candidates-list">
-                            <td class="title">
-                                <div class="thumb">
-                                    <img class="img-fluid" src="https://i.hizliresim.com/bmfkl64.png" alt="">
-                                </div>
-                                <div class="candidate-list-details">
-                                    <div class="candidate-list-info">
-                                        <div class="candidate-list-title">
-                                            <h5 class="mb-0"><a href="#">Brooke Kelly</a></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="candidate-list-favourite-time text-center">
-                                <span class="candidate-list-time order-1">Ögrenci</span>
-                            </td>
-                            <td>
-                                <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                                    <li><a href="#" class="text-primary" data-toggle="tooltip" title=""
-                                            data-original-title="view"><i class="bi bi-eye-fill"></i></a>
-                                    </li>
-                                    <li><a href="#" class="text-info" data-toggle="tooltip" title=""
-                                            data-original-title="Edit"><i class="bi bi-pencil-fill"></i></a>
-                                    </li>
-                                    <li><a href="#" class="text-danger" data-toggle="tooltip" title=""
-                                            data-original-title="Delete"><i class="bi bi-trash3-fill"></i></a>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr class="candidates-list">
-                            <td class="title">
-                                <div class="thumb">
-                                    <img class="img-fluid" src="https://i.hizliresim.com/ronx7rv.png" alt="">
-                                </div>
-                                <div class="candidate-list-details">
-                                    <div class="candidate-list-info">
-                                        <div class="candidate-list-title">
-                                            <h5 class="mb-0"><a href="#">Brooke Kelly</a></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="candidate-list-favourite-time text-center">
-                                <span class="candidate-list-time order-1">Ögrenci</span>
-                            </td>
-                            <td>
-                                <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                                    <li><a href="#" class="text-primary" data-toggle="tooltip" title=""
-                                            data-original-title="view"><i class="bi bi-eye-fill"></i></a>
-                                    </li>
-                                    <li><a href="#" class="text-info" data-toggle="tooltip" title=""
-                                            data-original-title="Edit"><i class="bi bi-pencil-fill"></i></a>
-                                    </li>
-                                    <li><a href="#" class="text-danger" data-toggle="tooltip" title=""
-                                            data-original-title="Delete"><i class="bi bi-trash3-fill"></i></a>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
-                <div class="text-center mt-3 mt-sm-3">
+                <!-- <div class="text-center mt-3 mt-sm-3">
                     <ul class="pagination justify-content-center mb-0">
                         <li class="page-item disabled"> <span class="page-link">Prev</span> </li>
                         <li class="page-item active" aria-current="page"><span class="page-link">1 </span>
@@ -135,6 +74,48 @@
                         <li class="page-item"><a class="page-link" href="#">25</a></li>
                         <li class="page-item"> <a class="page-link" href="#">Next</a> </li>
                     </ul>
+                </div> -->
+            </div>
+        </div>
+        <div id="userViewModal" class="user-dashboard-info-box table-responsive mb-0 user-view-modal fade">
+            <div class="container">
+                <button type="button" class="btn-close" onclick="toggleUserViewModal()" aria-label="Close"></button>
+                <div class="row">
+                    <div class="col-md-3 thumb">
+                        <img class="img-fluid" id="userImg" src="https://i.hizliresim.com/ii8tvbv.png" alt="">
+                    </div>
+                    <div class="col-md-9">
+                        <form>
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control" id="userName" placeholder="Adı">
+                                <label for="floatingInput1">Adı</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control" id="userSurname" placeholder="Soyadı">
+                                <label for="floatingInput1">Soyadı</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <input type="email" class="form-control" id="userMail" placeholder="Mail">
+                                <label for="floatingInput1">Mail</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control" id="userTC" placeholder="TC No">
+                                <label for="floatingInput1">TC No</label>
+                            </div>
+                            <div class="btn-group user-type-btn-group" id="userType" role="group"
+                                aria-label="Basic mixed styles example">
+                                <button type="button" id="userType0" class="btn btn-success">Öğrenci</button>
+                                <button type="button" id="userType1" class="btn btn-success">Öğretmen</button>
+                                <button type="button" id="userType2" class="btn btn-success">Admin</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="footer">
+                    <button type="button" class="btn btn-danger btn-delete" id="btnDeleteValidationModal"
+                        aria-label="Close"><i class="bi bi-trash3-fill"></i> Sil</button>
+                    <button type="button" class="btn btn-primary close-user-view-modal" id="btnSubmitViewModal"
+                        aria-label="Close">Tamam</button>
                 </div>
             </div>
         </div>
@@ -147,6 +128,14 @@
                 $("#nav-placeholder").children().find('.list-item').filter(":contains('Kullanıcılar')").addClass("active");
             });
         });
+    </script>
+    <script src="users.js">
+    </script>
+    <script>
+        $('#userType').on('click', '.btn', function () {
+            $(this).addClass('active').siblings().removeClass('active');
+        });
+
     </script>
 </body>
 

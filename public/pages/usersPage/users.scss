@@ -1,51 +1,124 @@
 .body {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-
-.user-dashboard-info-box {
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
-    padding: 1.5rem;
-
-    .candidates-list {
-        .thumb {
-            margin-right: 20px;
-
-            img {
-                width: 80px;
-                height: 80px;
-                object-fit: cover;
-                overflow: hidden;
-                border-radius: 50%;
+    .users{
+        max-height: 100%;
+        .user-dashboard-info-box {
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+        
+            .candidates-list {
+                .thumb {
+                    margin-right: 20px;
+        
+                    img {
+                        width: 80px;
+                        height: 80px;
+                        object-fit: cover;
+                        overflow: hidden;
+                        border-radius: 50%;
+                    }
+                }
+        
+                td {
+                    vertical-align: middle;
+        
+                    li {
+                        margin: 0 4px;
+                    }
+                }
+        
+            }
+        
+            .title {
+                display: flex;
+                align-items: center;
+                padding: 30px 0;
+            }
+        
+            .table {
+                thead {
+                    th {
+                        border-bottom: none;
+                    }
+                }
             }
         }
-
-        td {
-            vertical-align: middle;
-
-            li {
-                margin: 0 4px;
-            }
-        }
-
     }
+    
+.user-view-modal {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.3);
 
-    .title {
+    &.show {
         display: flex;
-        align-items: center;
-        padding: 30px 0;
+        opacity: 1;
     }
 
-    .table {
-        thead {
-            th {
-                border-bottom: none;
+    .container {
+        position: relative;
+        background-color: white;
+
+        .btn-close {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .row {
+            padding: 20px;
+
+            .thumb {
+                img {
+                    width: 100%;
+                }
+            }
+
+            .user-type-btn-group {
+                .btn {
+                    opacity: 0.5;
+                    transition: all 0.3s;
+
+                    &:focus {
+                        box-shadow: none;
+                    }
+
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+
+                .active {
+                    opacity: 1;
+                    transform: scale(1.1);
+                }
+            }
+        }
+
+        .footer {
+            margin-bottom: 10px;
+
+            .btn {
+                font-size: 18px;
+            }
+
+            .close-user-view-modal {
+                float: right;
             }
         }
     }
 }
+}
+
+
+
 
 .mb-0,
 .my-0 {
