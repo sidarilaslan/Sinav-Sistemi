@@ -46,14 +46,14 @@
   <div class="forgetPassword fade" id="validationModal">
     <div class="forgetPasswordContainer col-md-3">
       <button type="button" class="btn-close" id="btnCloseValidationModal" aria-label="Close"></button>
-      <form>
+      <form action="" id='forgetPasswordForm' novalidate>
         <div class="form-floating mb-4">
-          <input type="email" class="form-control" id="floatingInput1" placeholder="name@example.com">
-          <label for="floatingInput1">Email adresi</label>
+          <input type="email" class="form-control" id="emailControl" placeholder="name@example.com">
+          <label for="emailControl">Email adresi</label>
         </div>
         <div class="form-floating mb-4">
-          <input type="text" class="form-control" id="floatingInput2" placeholder="TC">
-          <label for="floatingInput2">TC</label>
+          <input type="text" class="form-control" id="codeKontrol" placeholder="Kodu giriniz">
+          <label for="codeKontrol">Kod</label>
         </div>
 
         <button class="w-100 btn btn-lg btn-primary form-floating mb-4" id="btnConfirmForgetPassword"
@@ -81,7 +81,7 @@
   </div>
 
 
-
+  <script src="/public/pages/loginPage/login.js"></script>
   <script src="/public/src/js/jquery-3.6.0.min.js">
   </script>
   <script>
@@ -109,6 +109,10 @@
       $('#btnCloseSetPasswordModal').click();
       alert("Parola güncelleme başarılı.");
     })
+
+
+
+
   </script>
 
 </body>

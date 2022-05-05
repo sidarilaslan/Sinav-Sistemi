@@ -29,10 +29,4 @@ router.get('/:key/:value', (req, res) => {
 
 });
 
-
-// router.get('/ID/:id', (req, res) => {
-
-// });
-
-
 module.exports = router;
