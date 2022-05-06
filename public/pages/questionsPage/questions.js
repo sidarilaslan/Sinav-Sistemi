@@ -137,7 +137,19 @@ function submitQuestion(questionID, modalType) {
         $("#answers").children(".active").children("input").attr("id").slice(6)
       ),
     };
+    let answers = [];
+    $("#answers")
+      .children()
+      .children("input")
+      .each(function (index) {
+        answers.push({
+          answerText: this.value,
+          answerIndex: index,
+          questionID: questionID,
+        });
+      });
     console.log(question);
+    console.log(answers);
   }
   toggleUserViewModal();
 }
