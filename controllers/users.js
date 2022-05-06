@@ -10,7 +10,12 @@ async function getUser(key, value) {
     return (await x.query(`SELECT * FROM tblUsers where ${key}='${value}'`)).recordset;
 
 }
+async function searchUser(mail, password) {
 
+    let x = await connectDB();
+    return (await x.query(`SELECT * FROM tblUsers WHERE mail = '${mail}' AND password = '${password}'`)).recordset;
+
+}
 // let getUser = (userID) => {
 
 //     console.log(userID);
@@ -23,6 +28,7 @@ async function getUser(key, value) {
 
 module.exports = {
     getUsers,
-    getUser
+    getUser,
+    searchUser
 
 }

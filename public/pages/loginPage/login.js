@@ -1,29 +1,30 @@
 
 const forgetPassForm = document.querySelector("#forgetPasswordForm");
-const email = document.querySelector("#emailControl");
+const loginForm = document.querySelector("#loginForm");
+const mail = document.querySelector(".mailControl");
+const password = document.querySelector(".passwordControl");
 
-function sendMail() {
+forgetPassForm.addEventListener("submit", (e) => {
 
     let formData = {
-        email: email.value
+        mail: mail.value
     }
-
-    let xhr = new XMLHttpRequest();
     let resTxt;
-    xhr.open('POST', '/');
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', '/forget');
     xhr.setRequestHeader('content-type', 'application/json');
     xhr.onload = () => {
         if (xhr.status == 200) {
-            resTxt = JSON.parse(xhr.responseText).code;
+            // resTxt = JSON.parse(xhr.responseText).code;
         }
-        console.log("kod degeri ->", resTxt);
+        // console.log("kod degeri ->", resTxt);
 
     }
 
 
     xhr.send(JSON.stringify(formData));
-    return resTxt;
 
-};
+});
+
 
 

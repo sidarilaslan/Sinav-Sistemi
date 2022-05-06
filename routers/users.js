@@ -13,6 +13,7 @@ router.get('/', (req, res) => {
 });
 
 
+
 // router.get('/:id', (req, res) => {
 
 //     userController.getUser(req.params.id).then(result => {
