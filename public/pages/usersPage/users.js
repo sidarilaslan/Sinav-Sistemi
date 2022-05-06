@@ -70,6 +70,7 @@ function setViewModal(user, modalType) {
   $("#userName").val(user.name).attr("disabled", isDisabled);
   $("#userSurname").val(user.surname).attr("disabled", isDisabled);
   $("#userMail").val(user.mail).attr("disabled", isDisabled);
+  $("#userPassword").val(user.password).attr("disabled", isDisabled);
   $("#userTC").val(user.tcNO).attr("disabled", isDisabled);
   $("#userType" + user.userTypeID).addClass("active");
   $("#userType").children().attr("disabled", isDisabled);
@@ -86,8 +87,9 @@ function submitViewModal(modalType, userID) {
     let user = {
       userID: userID,
       name: $("#userName").val(),
-      surName: $("#userName").val(),
+      surName: $("#userSurname").val(),
       mail: $("#userMail").val(),
+      password: $("#userPassword").val(),
       tcNO: $("#userTC").val(),
       userTypeID: parseInt(
         $("#userType").children(".active").attr("id").slice(8)
