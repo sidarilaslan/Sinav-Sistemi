@@ -2,7 +2,7 @@ const { connectDB } = require('../loaders/db');
 
 
 let getQuestions = connectDB().then(async result => {
-    return (await (result.query('SELECT * FROM tblQuestions'))).recordset;
+    return (await (result.query('SELECT * FROM tblQuestions Q INNER JOIN tblSections S on Q.sectionID = S.sectionID INNER JOIN tblUnits U on Q.unitID = U.unitID'))).recordset;
 
 });
 
