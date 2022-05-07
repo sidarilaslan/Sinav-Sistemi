@@ -1,45 +1,30 @@
 $(document).ready(function () {
-  let konular = [
-    {
-      sectionID: 0,
-      sectionName: "Matematik",
-    },
-    {
-      sectionID: 1,
-      sectionName: "Kimya",
-    },
-  ];
-  let uniteler = [
-    {
-      unitID: 4,
-      unitName: "Carpma",
-      sectionID: 0,
-    },
-    {
-      unitID: 5,
-      unitName: "Bolme",
-      sectionID: 0,
-    },
-    {
-      unitID: 6,
-      unitName: "Organik kimya",
-      sectionID: 1,
-    },
-  ];
-  konular.forEach((konu) => {
-    $("#section").append(
-      '<option value="' + konu.sectionID + '">' + konu.sectionName + "</option>"
-    );
-  });
-  $("#section").on("change", function (event) {
-    $("#unit").children().remove();
-    uniteler
-      .filter((x) => x.sectionID == event.target.value)
-      .forEach((unite) => {
-        $("#unit").append(
-          '<option value="' + unite.unitID + '">' + unite.unitName + "</option>"
+  $.get("/sections/get", function (sections) {
+    $.get("/units/get", function (units) {
+      sections.forEach((section) => {
+        $("#section").append(
+          '<option value="' +
+            section.sectionID +
+            '">' +
+            section.sectionName +
+            "</option>"
         );
       });
+      $("#section").on("change", function (event) {
+        $("#unit").children().remove();
+        units
+          .filter((x) => x.sectionID == event.target.value)
+          .forEach((unit) => {
+            $("#unit").append(
+              '<option value="' +
+                unit.unitID +
+                '">' +
+                unit.unitName +
+                "</option>"
+            );
+          });
+      });
+    });
   });
 });
 function addQuestion() {
@@ -67,8 +52,8 @@ function addQuestion() {
   $.post(
     "/questions/insert",
     { question: JSON.stringify(question), answers: JSON.stringify(answers) },
-    function (data) {
-      console.log(data);
-    }
+    function (data) {}
   );
+  alert("Soru eklendi.");
+  location.reload();
 }

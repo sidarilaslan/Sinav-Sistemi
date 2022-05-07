@@ -8,24 +8,16 @@ async function getQuestions() {
     )
   ).recordset;
 }
-async function getQuestions31() {
-  let x = await connectDB();
-  return (
-    await x.query(
-      "SELECT * FROM tblQuestions Q INNER JOIN tblSections S on Q.sectionID = S.sectionID INNER JOIN tblUnits U on Q.unitID = U.unitID"
-    )
-  ).recordset;
-}
 
-async function getQuestion(key, value) {
+async function getQuestion(questionID) {
   let x = await connectDB();
   return (
     await x.query(
-      `SELECT * FROM tblQuestions Q INNER JOIN tblAnswers A on Q.questionID = A.questionID INNER JOIN tblSections S on Q.sectionID = S.sectionID INNER JOIN tblUnits U on Q.unitID = U.unitID where Q.${key}='${value}'`
+      `SELECT * FROM tblQuestions Q INNER JOIN tblAnswers A on Q.questionID = A.questionID INNER JOIN tblSections S on Q.sectionID = S.sectionID INNER JOIN tblUnits U on Q.unitID = U.unitID where Q.questionID='${questionID}'`
     )
   ).recordset;
 }
-async function insertQuestion(question, answers) {
+async function insertQuestion(question) {
   let x = await connectDB();
   question = JSON.parse(question);
   return (
@@ -37,20 +29,37 @@ async function insertQuestion(question, answers) {
 async function insertAnswers(result, answers) {
   let x = await connectDB();
   answers = JSON.parse(answers);
-  console.log(result[0].questionID);
   answers.forEach((answer) => {
-    console.log(
-      `Insert tblAnswers values('${answer.answerText}', ${result[0].questionID}, ${answer.answerIndex})`
-    );
     x.query(
-      `Insert tblAnswers values('${answer.answerText}', ${result[0].questionID}, ${answer.answerIndex})`
+      `Insert into tblAnswers values('${answer.answerText}', ${result[0].questionID}, ${answer.answerIndex})`
     );
   });
+}
+async function updateQuestion(question, answers) {
+  let x = await connectDB();
+  question = JSON.parse(question);
+  answers = JSON.parse(answers);
+  await x.query(
+    `Update tblQuestions set questionText='${question.questionText}' , sectionID=${question.sectionID}, unitID=${question.unitID},picturePath='resim yolu' ,rightAnswerIndex=${question.rightAnswerIndex} where questionID=${question.questionID}`
+  );
+  answers.forEach((answer) => {
+    x.query(
+      `Update tblAnswers set answerText='${answer.answerText}' where answerIndex= ${answer.answerIndex} and questionID=${question.questionID}`
+    );
+  });
+}
+async function deleteQuestion(questionID) {
+  let x = await connectDB();
+  x.query(`Delete from tblAnswers where questionID = ${questionID}`);
+  return (
+    await x.query(`Delete from tblQuestions where questionID = ${questionID}`)
+  ).recordset;
 }
 module.exports = {
   getQuestions,
   getQuestion,
   insertQuestion,
   insertAnswers,
-  getQuestions31,
+  deleteQuestion,
+  updateQuestion,
 };

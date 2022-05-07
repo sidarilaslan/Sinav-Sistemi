@@ -1,63 +1,44 @@
-let konular = [
-  {
-    sectionID: 1,
-    sectionName: "Matematik",
-  },
-  {
-    sectionID: 2,
-    sectionName: "Kimya",
-  },
-];
-let uniteler = [
-  {
-    unitID: 4,
-    unitName: "Carpma",
-    sectionID: 1,
-  },
-  {
-    unitID: 5,
-    unitName: "Bolme",
-    sectionID: 1,
-  },
-  {
-    unitID: 6,
-    unitName: "Organik kimya",
-    sectionID: 2,
-  },
-];
+let sections = [];
+let units = [];
 $(document).ready(function () {
-  $.getJSON("/questions", function (users) {
-    $(users).each(function (index) {
+  $.get("/questions/get", function (questions) {
+    $.get("/sections/get", function (_sections) {
+      sections = _sections;
+    });
+    $.get("/units/get", function (_units) {
+      units = _units;
+    });
+    $(questions).each(function (index) {
       $("#questionList").append(
         `
-              <tr class="question-item">
-                        <td class="question-id">${this.questionID}</td>
-                        <td class="question-text">
-                            <p class="mb-0">${this.questionText}</p>
-                        </td>
-                        <td class="question-section text-end">
-                            <p>${this.sectionName}</p>
-                        </td>
-                        <td class="question-unit text-end">
-                            <p>${this.unitName}</p>
-                        </td>
-                        <td class="actions text-end">
-                            <a href="#" onclick="openViewModal('${this.questionID}', 'view')" class="text-primary" data-toggle="tooltip" title=""
-                                data-original-title="view"><i class="bi bi-eye-fill"></i></a>
-                            <a href="#" onclick="openViewModal('${this.questionID}', 'edit')" class="text-info" data-toggle="tooltip" title="" data-original-title="Edit"><i
-                                    class="bi bi-pencil-fill"></i></a>
-                            <a href="#" onclick="openViewModal('${this.questionID}', 'remove')" class="text-danger" data-toggle="tooltip" title=""
-                                data-original-title="Delete"><i class="bi bi-trash3-fill"></i></a>
-                        </td>
-                    </tr>
-              `
+                  <tr class="question-item">
+                            <td class="question-id">${this.questionID}</td>
+                            <td class="question-text">
+                                <p class="mb-0">${this.questionText}</p>
+                            </td>
+                            <td class="question-section text-end">
+                                <p>${this.sectionName}</p>
+                            </td>
+                            <td class="question-unit text-end">
+                                <p>${this.unitName}</p>
+                            </td>
+                            <td class="actions text-end">
+                                <a href="#" onclick="openViewModal('${this.questionID}', 'view')" class="text-primary" data-toggle="tooltip" title=""
+                                    data-original-title="view"><i class="bi bi-eye-fill"></i></a>
+                                <a href="#" onclick="openViewModal('${this.questionID}', 'edit')" class="text-info" data-toggle="tooltip" title="" data-original-title="Edit"><i
+                                        class="bi bi-pencil-fill"></i></a>
+                                <a href="#" onclick="openViewModal('${this.questionID}', 'remove')" class="text-danger" data-toggle="tooltip" title=""
+                                    data-original-title="Delete"><i class="bi bi-trash3-fill"></i></a>
+                            </td>
+                        </tr>
+                  `
       );
     });
   });
 });
 function openViewModal(questionID, modalType) {
   toggleUserViewModal();
-  $.getJSON("/questions/select/questionID/" + questionID, function (question) {
+  $.get("/questions/get/" + questionID, function (question) {
     setViewModal(question, modalType);
   });
 }
@@ -77,23 +58,23 @@ function setViewModal(question, modalType) {
   );
   $("#questionText").val(question[0].questionText).attr("disabled", isDisabled);
   $("#section").children().remove();
-  konular.forEach((konu) => {
+  sections.forEach((section) => {
     $("#section").append(
-      '<option value="' + konu.sectionID + '">' + konu.sectionName + "</option>"
+      '<option value="' +
+        section.sectionID +
+        '">' +
+        section.sectionName +
+        "</option>"
     );
   });
   $("#section")
     .on("change", function (event) {
       $("#unit").children().remove();
-      uniteler
+      units
         .filter((x) => x.sectionID == event.target.value)
-        .forEach((unite) => {
+        .forEach((unit) => {
           $("#unit").append(
-            '<option value="' +
-              unite.unitID +
-              '">' +
-              unite.unitName +
-              "</option>"
+            '<option value="' + unit.unitID + '">' + unit.unitName + "</option>"
           );
         });
     })
@@ -102,12 +83,12 @@ function setViewModal(question, modalType) {
     .attr("disabled", isDisabled);
   $("#unit").val(question[0].unitID[0]).attr("disabled", isDisabled);
 
-  question.forEach(function (answer, index) {
-    $("#answer" + index)
+  question.forEach(function (answer) {
+    $("#answer" + answer.answerIndex)
       .val(answer.answerText)
       .attr("disabled", isDisabled);
   });
-  $("#answer" + question[0].rightAnswerID)
+  $("#answer" + question[0].rightAnswerIndex)
     .parent()
     .addClass("active")
     .siblings()
@@ -133,7 +114,7 @@ function submitQuestion(questionID, modalType) {
       questionText: $("#questionText").val(),
       sectionID: parseInt($("#section").val()),
       unitID: parseInt($("#unit").val()),
-      rightAnswerID: parseInt(
+      rightAnswerIndex: parseInt(
         $("#answers").children(".active").children("input").attr("id").slice(6)
       ),
     };
@@ -148,15 +129,23 @@ function submitQuestion(questionID, modalType) {
           questionID: questionID,
         });
       });
-    console.log(question);
-    console.log(answers);
+    $.post(
+      "/questions/update",
+      { question: JSON.stringify(question), answers: JSON.stringify(answers) },
+      function (data) {
+        alert("Soru güncellendi.");
+        location.reload();
+      }
+    );
   }
   toggleUserViewModal();
 }
 function removeAlert(questionID) {
-  if (confirm("Bu soruyu silmeye emin misiniz? " + questionID)) {
-    //DATABASE'den questionID olanı sil.
-    console.log("Bu kullanici silindi: " + questionID);
+  if (confirm("Bu soruyu silmeye emin misiniz?")) {
+    $.post("/questions/delete", { questionID: questionID }, function (data) {
+      alert("Bu soru silindi.");
+      location.reload();
+    });
   }
 }
 function toggleUserViewModal() {
