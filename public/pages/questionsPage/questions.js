@@ -57,7 +57,7 @@ $(document).ready(function () {
 });
 function openViewModal(questionID, modalType) {
   toggleUserViewModal();
-  $.getJSON("/questions/questionID/" + questionID, function (question) {
+  $.getJSON("/questions/select/questionID/" + questionID, function (question) {
     setViewModal(question, modalType);
   });
 }

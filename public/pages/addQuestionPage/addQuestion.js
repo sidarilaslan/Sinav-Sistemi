@@ -45,8 +45,8 @@ $(document).ready(function () {
 function addQuestion() {
   let question = {
     questionText: $("#questionText").val(),
-    questionSectionID: parseInt($("#section").val()),
-    questionUnitID: parseInt($("#unit").val()),
+    sectionID: parseInt($("#section").val()),
+    unitID: parseInt($("#unit").val()),
     rightAnswerIndex: parseInt(
       $("#answers").children(".active").children("input").attr("id").slice(6)
     ),
@@ -63,6 +63,12 @@ function addQuestion() {
         answerText: value.value,
       });
     });
-  console.log(question);
-  console.log(answers);
+
+  $.post(
+    "/questions/insert",
+    { question: JSON.stringify(question), answers: JSON.stringify(answers) },
+    function (data) {
+      console.log(data);
+    }
+  );
 }
