@@ -1,6 +1,5 @@
 $(document).ready(function () {
-  $.getJSON("/users", function (users) {
-    console.log(users);
+  $.get("/users/get", function (users) {
     $(users).each(function (index) {
       $("#usersList").append(
         `<tr class="candidates-list">
@@ -49,7 +48,7 @@ $(document).ready(function () {
 });
 function openViewModal(userID, modalType) {
   toggleUserViewModal();
-  $.getJSON("/users/userID/" + userID, function (user) {
+  $.get("/users/get/userID/" + userID, function (user) {
     setViewModal(user[0], modalType);
     $("#btnSubmitViewModal").attr(
       "onClick",
@@ -95,20 +94,23 @@ function submitViewModal(modalType, userID) {
         $("#userType").children(".active").attr("id").slice(8)
       ),
     };
-    console.log(user);
     editUser(user);
     toggleUserViewModal();
   }
   $("#userType").children().removeClass("active");
 }
 function editUser(user) {
-  //DATABASE'e user'i gönder.
-  console.log("Bu kullanici editlendi: " + user.userID);
+  $.post("/users/update", user, function (data) {
+    alert("Bu kullanıcı düzenlendi.");
+    location.reload();
+  });
 }
 function removeAlert(userID) {
-  if (confirm("Bu kullanıcıyı silmeye emin misiniz? " + userID)) {
-    //DATABASE'den userID olanı sil.
-    console.log("Bu kullanici silindi: " + userID);
+  if (confirm("Bu kullanıcıyı silmeye emin misiniz?")) {
+    $.post("/users/delete", { userID: userID }, function (data) {
+      alert("Bu kullanıcı silindi.");
+      location.reload();
+    });
   }
 }
 

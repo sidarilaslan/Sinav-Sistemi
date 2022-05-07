@@ -9,13 +9,14 @@ function submit() {
       $("#userType").children(".active").attr("id").slice(8)
     ),
   };
-  editUser(user);
+  addUser(user);
   clean();
 }
-function editUser(user) {
-  //DATABASE'e user'i gönder.
-  console.log("Bu kullanici eklendi: ");
-  console.log(user);
+function addUser(user) {
+  $.post("/users/insert", user, function (data) {
+    alert("Bu kullanıcı eklendi.");
+    location.reload();
+  });
 }
 function clean() {
   $("#userName").val("");
