@@ -14,18 +14,18 @@ router.get('/', (res, req) => {
 });
 
 router.post('/login', (req, res) => {
-    userController.searchUser(req.body.mail, req.body.password).then(data => {
-        if (data.length > 0) {
-            res.redirect('./public/pages/usersPage/users.html');
+    userController.searchUser(req.body.mail, req.body.password).then(result => {
+        if (result.length > 0) {
+            res.send(true);
+            res.end();
         }
         else {
-            res.redirect('/');
+            res.send(false);
+            res.end();
         }
     });
 
 });
-
-
 
 
 

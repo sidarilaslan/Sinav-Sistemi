@@ -20,14 +20,13 @@
       <img class="mb-4 logo" src="/public/src/img/logo.png" alt="" width="144" height="144">
 
       <div class="form-floating">
-        <input type="email" class="form-control mailControl" id="loginMailControl" placeholder="name@example.com"
-          name="mail">
-        <label for="loginMailControl">Email adresi</label>
+        <input type="email" class="form-control mailControl" id="loginMail" placeholder="name@example.com" name="mail">
+        <label for="loginMail">Email adresi</label>
       </div>
       <div class="form-floating">
-        <input type="password" class="form-control passwordControl" name="password" id="loginPasswordControl"
+        <input type="password" class="form-control passwordControl" name="password" id="loginPassword"
           placeholder="Password">
-        <label for="loginPasswordControl">Şifre</label>
+        <label for="loginPassword">Şifre</label>
       </div>
 
       <div class="d-flex justify-content-between m-3">
@@ -38,11 +37,10 @@
         <a href="#" class="text-decoration-none" id="btnForgetPassword">Şifremi Unuttum</a>
 
       </div>
-      <button class="w-100 btn btn-lg btn-primary" type="submit">
-        <!-- <a href="/public/pages/usersPage/users.html">Giriş 
-          yap</a> --> Giriş Yap
+      <button class="w-100 btn btn-lg btn-primary" type="button" onclick="loginSubmit()">
+        Giriş Yap
       </button>
-      <!--link kaldıralacak-->
+
       <p class="mt-5 mb-3 text-muted">&copy; 2022–2023</p>
     </form>
   </main>

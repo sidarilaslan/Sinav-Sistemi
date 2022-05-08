@@ -1,30 +1,29 @@
+function loginSubmit() {
 
-const forgetPassForm = document.querySelector("#forgetPasswordForm");
-const loginForm = document.querySelector("#loginForm");
-const mail = document.querySelector(".mailControl");
-const password = document.querySelector(".passwordControl");
+    let loginInfo = {
 
-forgetPassForm.addEventListener("submit", (e) => {
+        mail: $("#loginMail").val(),
+        password: $("#loginPassword").val(),
 
-    let formData = {
-        mail: mail.value
-    }
-    let resTxt;
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', '/forget');
-    xhr.setRequestHeader('content-type', 'application/json');
-    xhr.onload = () => {
-        if (xhr.status == 200) {
-            // resTxt = JSON.parse(xhr.responseText).code;
+    };
+    login(loginInfo);
+}
+function login(loginInfo) {
+    $.post("/login", loginInfo, function (data) {
+        if (data) {
+            alert("Giriş başarılı");
+            location.replace('./public/pages/usersPage/users.html');
+
         }
-        // console.log("kod degeri ->", resTxt);
+        else {
+            alert("Mail veya şifre yanlış");
+            clean();
 
-    }
+        }
+    });
+}
+function clean() {
 
-
-    xhr.send(JSON.stringify(formData));
-
-});
-
-
-
+    $("#loginMail").val("");
+    $("#loginPassword").val("");
+}
