@@ -48,18 +48,18 @@
   <div class="forgetPassword fade" id="validationModal">
     <div class="forgetPasswordContainer col-md-3">
       <button type="button" class="btn-close" id="btnCloseValidationModal" aria-label="Close"></button>
-      <form action="/forget" id='forgetPasswordForm' method="post">
+      <form>
         <div class="form-floating mb-4">
-          <input type="email" class="form-control mailControl" id="resetMailControl" placeholder="name@example.com">
-          <label for="resetMailControl">Email adresi</label>
+          <input type="email" class="form-control mailControl" id="resetMail" placeholder="name@example.com">
+          <label for="resetMail">Email adresi</label>
         </div>
         <div class="form-floating mb-4">
-          <input type="text" class="form-control" id="codeKontrol" placeholder="Kodu giriniz">
+          <input type="text" class="form-control" id="codeControl" placeholder="Kodu giriniz">
           <label for="codeKontrol">Kod</label>
         </div>
 
-        <button class="w-100 btn btn-lg btn-primary form-floating mb-4" id="btnConfirmForgetPassword"
-          type="submit">Doğrula</button>
+        <button class="w-100 btn btn-lg btn-primary form-floating mb-4" id="btnConfirmForgetPassword" type="button"
+          onclick="resetPassSubmit()">Doğrula</button>
       </form>
     </div>
   </div>
@@ -98,10 +98,10 @@
       toggleClass('#validationModal', 'fade', 'show');
     })
 
-    $('#btnConfirmForgetPassword').click(function () {
-      $('#btnCloseValidationModal').click();
-      toggleClass('#setPasswordModal', 'show', 'fade');
-    })
+    // $('#btnConfirmForgetPassword').click(function () {
+    //   $('#btnCloseValidationModal').click();
+    //   toggleClass('#setPasswordModal', 'show', 'fade');
+    // })
 
     $('#btnCloseSetPasswordModal').click(function () {
       toggleClass('#setPasswordModal', 'fade', 'show');

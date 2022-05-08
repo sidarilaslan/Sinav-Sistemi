@@ -1,16 +1,16 @@
 function loginSubmit() {
 
-    let loginInfo = {
+    let data = {
 
         mail: $("#loginMail").val(),
         password: $("#loginPassword").val(),
 
     };
-    login(loginInfo);
+    login(data);
 }
-function login(loginInfo) {
-    $.post("/login", loginInfo, function (data) {
-        if (data) {
+function login(data) {
+    $.post("/login", data, function (result) {
+        if (result) {
             alert("Giriş başarılı");
             location.replace('./public/pages/usersPage/users.html');
 
@@ -19,6 +19,29 @@ function login(loginInfo) {
             alert("Mail veya şifre yanlış");
             clean();
 
+        }
+    });
+}
+function resetPassSubmit() {
+
+    let data = {
+        mail: $("#resetMail").val(),
+    };
+
+    resetPassword(data);
+
+}
+
+function resetPassword(data) {
+    $.post("/forget", data, function (result) {
+        if (result) {
+            alert(`Sıfırlama kodu gönderildi `);
+            alert(`test: code-> ${result}`);
+
+
+        }
+        else {
+            alert('Yanlıs formatta mail girdiniz ');
         }
     });
 }

@@ -30,60 +30,37 @@ router.post('/login', (req, res) => {
 
 
 
+router.post('/forget', (res, req) => {
+
+    const transpoter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'steamsidar@gmail.com',
+            pass: 'npubbeegdmtgkawg'
+        }
+    });
+    const code = randomNumController.randNum();
+    const mailOptions = {
+        from: 'steamsidar@gmail.com',
+        to: res.body.mail,
+        subject: 'Sidar ilaslan tarafından gönderildi',
+        text: `Şifremi unuttum Kodu: ${code}`
+    }
+
+    transpoter.sendMail(mailOptions, (err, info) => {
+        if (err) {
+            req.send(false);
+            req.end();
+        }
+        else {
+            req.send(`${code}`);
+            req.end();
+
+        }
+    });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// router.post('/forget', (res, req) => {
-
-//     const transpoter = nodemailer.createTransport({
-//         service: 'gmail',
-//         auth: {
-//             user: 'steamsidar@gmail.com',
-//             pass: 'npubbeegdmtgkawg'
-//         }
-//     });
-
-//     const mailOptions = {
-//         from: 'steamsidar@gmail.com',
-//         to: "steamsidar@gmail.com",
-//         subject: 'Sidar ilaslan tarafından gönderildi',
-//         text: `Şifremi unuttum Kodu:${randomNumController.randNum}`
-//     }
-//     const requestText = {
-//         isSucess: true,
-//         code: randomNumController.randNum
-
-//     }
-//     transpoter.sendMail(mailOptions, (err, info) => {
-//         if (err) {
-//             console.log(err);
-//             req.send('error');
-//         }
-//         else {
-//             console.log("email send : " + info.response);
-//             req.send(requestText);
-
-//         }
-//     });
-
-
-// });
+});
 
 
 
