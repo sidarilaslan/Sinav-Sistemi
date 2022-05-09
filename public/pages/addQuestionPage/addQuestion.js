@@ -49,11 +49,28 @@ function addQuestion() {
       });
     });
 
-  $.post(
-    "/questions/insert",
-    { question: JSON.stringify(question), answers: JSON.stringify(answers) },
-    function (data) {}
+  let formData = new FormData();
+  let file_data = $("#file")[0].files[0];
+  console.log(file_data);
+  formData.append("image", file_data);
+  formData.append(
+    "question",
+    JSON.stringify({
+      question: question,
+      answers: answers,
+    })
   );
-  alert("Soru eklendi.");
-  location.reload();
+
+  $.ajax({
+    url: "/questions/insert",
+    type: "POST",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (data) {
+      console.log(data);
+      alert("Soru eklendi.");
+      location.reload();
+    },
+  });
 }

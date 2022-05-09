@@ -1,11 +1,18 @@
 const express = require("express");
+const bufferImage = require("buffer-image");
+const fileUpload = require("express-fileupload");
 const { questionController } = require("../controllers/index");
 const router = express.Router();
+router.use(fileUpload());
+
 router.post("/insert", (req, res) => {
-  questionController.insertQuestion(req.body.question).then((result) => {
-    questionController.insertAnswers(result, req.body.answers);
-  });
+  questionController
+    .insertQuestion(JSON.parse(req.body.question), req.files?.image)
+    .then((result) => {
+      console.log(result);
+    });
 });
+
 router.get("/get", (req, res) => {
   questionController.getQuestions().then((result) => {
     res.send(result);
@@ -26,11 +33,27 @@ router.post("/delete", (req, res) => {
 });
 router.post("/update", (req, res) => {
   questionController
-    .updateQuestion(req.body.question, req.body.answers)
+    .updateQuestion(JSON.parse(req.body.question), req.files?.image)
     .then((result) => {
       res.send(result);
       res.end();
     });
 });
+// router.post("/update", (req, res) => {
+//   questionController
+//     .updateQuestion(req.body.question, req.body.answers)
+//     .then((result) => {
+//       res.send(result);
+//       res.end();
+//     });
+// });
+// router.post("/uploadImage", (req, res) => {
+//   console.log(JSON.parse(req.body.question));
+//   // questionController.uploadImgQuestion(req.files.file).then(async (result) => {
+//   //   console.log(result);
+//   //   res.send(`data:image/png;base64,${result.toString("base64")}`);
+//   //   res.end();
+//   // });
+// });
 
 module.exports = router;

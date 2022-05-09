@@ -32,28 +32,6 @@
                     </tr>
                 </thead>
                 <tbody id="questionList" class="questions-body">
-                    <!-- <tr class="question-item">
-                        <td class="question-id">1</td>
-                        <td class="question-text">
-                            <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, ab natus, ad
-                                voluptatem magni, est optio in distinctio id modi eveniet ut beatae. Nihil maxime
-                                aspernatur, architecto cumque quibusdam ipsum!</p>
-                        </td>
-                        <td class="question-section text-end">
-                            <p>Matematik</p>
-                        </td>
-                        <td class="question-unit text-end">
-                            <p>Çarpma</p>
-                        </td>
-                        <td class="actions">
-                            <a href="#" class="text-primary" data-toggle="tooltip" title=""
-                                data-original-title="view"><i class="bi bi-eye-fill"></i></a>
-                            <a href="#" class="text-info" data-toggle="tooltip" title="" data-original-title="Edit"><i
-                                    class="bi bi-pencil-fill"></i></a>
-                            <a href="#" class="text-danger" data-toggle="tooltip" title=""
-                                data-original-title="Delete"><i class="bi bi-trash3-fill"></i></a>
-                        </td>
-                    </tr> -->
                 </tbody>
             </table>
         </div>
@@ -65,9 +43,10 @@
                     <div class="quiz-container">
                         <div class="question-item">
                             <div class="question-head">
-                                <div class="question-img">
+                                <div id="questionImg" class="question-img">
                                     <div class="image-picker">
-                                        <i class="bi bi-upload"></i>
+                                        <label for="file" class="btn"><i class="bi bi-upload"></i></label>
+                                        <input  type="file" id="file" name="file" onchange="document.getElementById('questionImg').style.backgroundImage ='url('+ window.URL.createObjectURL(this.files[0])+')'"/>
                                     </div>
                                 </div>
                                 <div class="question-text-area">

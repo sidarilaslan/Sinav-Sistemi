@@ -12,40 +12,70 @@ async function getQuestions() {
 async function getQuestion(questionID) {
   let x = await connectDB();
   return (
-    await x.query(
-      `SELECT * FROM tblQuestions Q INNER JOIN tblAnswers A on Q.questionID = A.questionID INNER JOIN tblSections S on Q.sectionID = S.sectionID INNER JOIN tblUnits U on Q.unitID = U.unitID where Q.questionID='${questionID}'`
-    )
+    await x
+      .query(
+        `SELECT * FROM tblQuestions Q INNER JOIN tblAnswers A on Q.questionID = A.questionID INNER JOIN tblSections S on Q.sectionID = S.sectionID INNER JOIN tblUnits U on Q.unitID = U.unitID where Q.questionID='${questionID}'`
+      )
+      .then((result) => {
+        console.log(result.recordset[0].image);
+        if (result.recordset[0].image != null)
+          result.recordset[0].image = `data:${
+            result.recordset[0].imageMimeType
+          };base64,${result.recordset[0].image.toString("base64")}`;
+        return result;
+      })
   ).recordset;
 }
-async function insertQuestion(question) {
-  let x = await connectDB();
-  question = JSON.parse(question);
-  return (
-    await x.query(
-      `Insert into tblQuestions OUTPUT Inserted.questionID values('${question.questionText}', ${question.sectionID}, ${question.unitID},'resim yolu',${question.rightAnswerIndex})`
-    )
-  ).recordset;
-}
-async function insertAnswers(result, answers) {
-  let x = await connectDB();
-  answers = JSON.parse(answers);
-  answers.forEach((answer) => {
-    x.query(
-      `Insert into tblAnswers values('${answer.answerText}', ${result[0].questionID}, ${answer.answerIndex})`
+async function insertQuestion(question, img) {
+  return await connectDB().then(async (db) => {
+    isThereUploadedImg = img != undefined;
+    console.log(
+      `Insert into tblQuestions OUTPUT Inserted.questionID values('${question.question.questionText}', ${question.question.sectionID}, ${question.question.unitID},${question.question.rightAnswerIndex}` +
+        (isThereUploadedImg ? `,@img,'${img?.mimetype}'` : ",NULL,NULL ") +
+        ")"
     );
+    return await (isThereUploadedImg
+      ? db.input("img", Buffer.from(img.data, "binary"))
+      : db
+    )
+      .query(
+        `Insert into tblQuestions OUTPUT Inserted.questionID values('${question.question.questionText}', ${question.question.sectionID}, ${question.question.unitID},${question.question.rightAnswerIndex}` +
+          (isThereUploadedImg ? `,@img,'${img?.mimetype}'` : ",NULL,NULL ") +
+          ")"
+      )
+      .then((result) => {
+        question.answers.forEach((answer) => {
+          db.query(
+            `Insert into tblAnswers values('${answer.answerText}', ${result.recordset[0].questionID}, ${answer.answerIndex})`
+          );
+        });
+        return result.recordset[0].questionID;
+      });
   });
 }
-async function updateQuestion(question, answers) {
-  let x = await connectDB();
-  question = JSON.parse(question);
-  answers = JSON.parse(answers);
-  await x.query(
-    `Update tblQuestions set questionText='${question.questionText}' , sectionID=${question.sectionID}, unitID=${question.unitID},picturePath='resim yolu' ,rightAnswerIndex=${question.rightAnswerIndex} where questionID=${question.questionID}`
-  );
-  answers.forEach((answer) => {
-    x.query(
-      `Update tblAnswers set answerText='${answer.answerText}' where answerIndex= ${answer.answerIndex} and questionID=${question.questionID}`
-    );
+async function updateQuestion(question, img) {
+  return await connectDB().then(async (db) => {
+    isThereUploadedImg = img != undefined;
+
+    return await (img != undefined
+      ? db.input("img", Buffer.from(img.data, "binary"))
+      : db
+    )
+      .query(
+        `Update tblQuestions set questionText='${question.question.questionText}', sectionID=${question.question.sectionID}, unitID=${question.question.unitID}, rightAnswerIndex = ${question.question.rightAnswerIndex} ` +
+          (isThereUploadedImg
+            ? `,image=@img, imageMimeType='${img.mimetype}' `
+            : "") +
+          `where questionID=${question.question.questionID}; Select * from tblQuestions where questionID=${question.question.questionID}`
+      )
+      .then(async (result) => {
+        question.answers.forEach((answer) => {
+          db.query(
+            `Update tblAnswers set answerText='${answer.answerText}' where answerIndex= ${answer.answerIndex} and questionID=${question.question.questionID}`
+          );
+        });
+        return result.recordset;
+      });
   });
 }
 async function deleteQuestion(questionID) {
@@ -55,11 +85,11 @@ async function deleteQuestion(questionID) {
     await x.query(`Delete from tblQuestions where questionID = ${questionID}`)
   ).recordset;
 }
+
 module.exports = {
   getQuestions,
   getQuestion,
   insertQuestion,
-  insertAnswers,
   deleteQuestion,
   updateQuestion,
 };
