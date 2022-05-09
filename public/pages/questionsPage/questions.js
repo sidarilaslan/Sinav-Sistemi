@@ -57,6 +57,8 @@ function setViewModal(question, modalType) {
     "removeAlert(" + question[0].questionID[0] + ")"
   );
   $("#questionText").val(question[0].questionText).attr("disabled", isDisabled);
+  if (question[0].image != null)
+    $("#questionImg").css("background-image", "url(" + question[0].image + ")");
   $("#section").children().remove();
   sections.forEach((section) => {
     $("#section").append(
@@ -129,21 +131,33 @@ function submitQuestion(questionID, modalType) {
           questionID: questionID,
         });
       });
-    $.post(
-      "/questions/update",
-      { question: JSON.stringify(question), answers: JSON.stringify(answers) },
-      function (data) {
-        alert("Soru güncellendi.");
-        location.reload();
-      }
+    let formData = new FormData();
+    let file_data = $("#file")[0].files[0];
+    console.log(file_data);
+    formData.append("image", file_data);
+    formData.append(
+      "question",
+      JSON.stringify({
+        question: question,
+        answers: answers,
+      })
     );
+
+    $.ajax({
+      url: "/questions/update",
+      type: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (data) {
+        location.reload();
+      },
+    });
   }
-  toggleUserViewModal();
 }
 function removeAlert(questionID) {
   if (confirm("Bu soruyu silmeye emin misiniz?")) {
     $.post("/questions/delete", { questionID: questionID }, function (data) {
-      alert("Bu soru silindi.");
       location.reload();
     });
   }
