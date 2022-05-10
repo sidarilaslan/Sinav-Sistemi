@@ -1,4 +1,6 @@
 $(document).ready(function () {
+  redirectUser();
+
   $.get("/sections/get", function (sections) {
     $.get("/units/get", function (units) {
       sections.forEach((section) => {

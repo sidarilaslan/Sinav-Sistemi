@@ -1,3 +1,5 @@
+redirectUser();
+
 function submit() {
   let user = {
     name: $("#userName").val(),

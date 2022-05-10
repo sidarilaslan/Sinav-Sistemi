@@ -1,5 +1,4 @@
 nav {
-
     * {
 
         margin: 0;
@@ -43,7 +42,7 @@ nav {
 
     .item-list {
         height: calc(100% - 120px);
-
+        
         .list-item {
             a {
                 text-decoration: none;
@@ -59,6 +58,31 @@ nav {
             &.active a {
                 color: #404041;
                 background-color: #fff;
+            }
+        }
+        .logOut{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background: #262626;
+            a{
+                color: red;
+            }
+        }
+    }
+
+    &.permission-1{
+        .item-list{
+            .admin-list{
+                display: none;
+            }
+        }
+    }
+    &.permission-3{
+        .item-list{
+            .teacher-list{
+                display: none;
             }
         }
     }

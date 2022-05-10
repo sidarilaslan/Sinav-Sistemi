@@ -1,4 +1,6 @@
 $(document).ready(function () {
+  redirectUser();
+
   $.get("/users/get", function (users) {
     $(users).each(function (index) {
       $("#usersList").append(

@@ -1,6 +1,7 @@
 let sections = [];
 let units = [];
 $(document).ready(function () {
+  redirectUser();
   $.get("/questions/get", function (questions) {
     $.get("/sections/get", function (_sections) {
       sections = _sections;

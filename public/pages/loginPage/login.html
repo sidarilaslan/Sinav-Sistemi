@@ -54,12 +54,14 @@
           <label for="resetMail">Email adresi</label>
         </div>
         <div class="form-floating mb-4">
-          <input type="text" class="form-control" id="codeControl" placeholder="Kodu giriniz">
+          <input type="text" class="form-control" id="emailCode" disabled placeholder="Kodu giriniz">
           <label for="codeKontrol">Kod</label>
         </div>
 
-        <button class="w-100 btn btn-lg btn-primary form-floating mb-4" id="btnConfirmForgetPassword" type="button"
-          onclick="resetPassSubmit()">Doğrula</button>
+        <button class="w-100 btn btn-lg btn-primary form-floating mb-4" type="button"
+          onclick="sendMailSubmit()" id="sendMailCodeButton">Kod Gönder</button>
+          <button class="w-100 btn btn-lg btn-primary form-floating mb-4 d-none" type="button"
+          onclick="checkMailCode()" id="checkMailCodeButton">Doğrula</button>
       </form>
     </div>
   </div>
@@ -68,54 +70,25 @@
       <button type="button" class="btn-close" id="btnCloseSetPasswordModal" aria-label="Close"></button>
       <form>
         <div class="form-floating mb-4">
-          <input type="password" class="form-control" id="floatingInput1" placeholder="Parola">
+          <input type="password" class="form-control" id="resetPassword1" placeholder="Parola">
           <label for="floatingInput1">Parola</label>
         </div>
         <div class="form-floating mb-4">
-          <input type="password" class="form-control" id="floatingInput2" placeholder="Parola">
+          <input type="password" class="form-control" id="resetPassword2" placeholder="Parola">
           <label for="floatingInput2">Parolayı Yeniden Girin</label>
         </div>
 
         <button class="w-100 btn btn-lg btn-primary form-floating mb-4" id="btnConfirmSetPassword"
-          type="submit">Tamamla</button>
+          type="submit" onclick="changePassword()">Tamamla</button>
       </form>
     </div>
   </div>
 
 
-  <script src="/public/pages/loginPage/login.js"></script>
   <script src="/public/src/js/jquery-3.6.0.min.js">
   </script>
-  <script>
-    function toggleClass(id, addClass, removeClass) {
-      $(id).addClass(addClass).removeClass(removeClass);
-    }
-
-    $('#btnForgetPassword').click(function () {
-      toggleClass('#validationModal', 'show', 'fade');
-    })
-    $('#btnCloseValidationModal').click(function () {
-      toggleClass('#validationModal', 'fade', 'show');
-    })
-
-    // $('#btnConfirmForgetPassword').click(function () {
-    //   $('#btnCloseValidationModal').click();
-    //   toggleClass('#setPasswordModal', 'show', 'fade');
-    // })
-
-    $('#btnCloseSetPasswordModal').click(function () {
-      toggleClass('#setPasswordModal', 'fade', 'show');
-    })
-
-    $('#btnConfirmSetPassword').click(function () {
-      $('#btnCloseSetPasswordModal').click();
-      alert("Parola güncelleme başarılı.");
-    })
-
-
-
-
-  </script>
+  <script src="/public/src/js/main.js"></script>
+  <script src="/public/pages/loginPage/login.js"></script>
 
 </body>
 

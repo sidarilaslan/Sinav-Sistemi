@@ -20,20 +20,23 @@
     <div class="list-item">
         <a href="#">
             <i class="bi bi-award-fill"></i>
-            Sınavlar Sonuçları</a>
+            Sınav Sonuçları</a>
 
     </div>
     <div class="admin-list">
-        <div class="list-item">
-            <a href="/public/pages/addUserPage/addUser.html">
-                <i class="bi bi-people-fill"></i>
-                Kullanıcı Ekle</a>
+        <div class="teacher-list">
+            <div class="list-item">
+                <a href="/public/pages/addUserPage/addUser.html">
+                    <i class="bi bi-people-fill"></i>
+                    Kullanıcı Ekle</a>
+            </div>
+            <div class="list-item">
+                <a href="/public/pages/usersPage/users.html">
+                    <i class="bi bi-people-fill"></i>
+                    Kullanıcılar</a>
+            </div>
         </div>
-        <div class="list-item">
-            <a href="/public/pages/usersPage/users.html">
-                <i class="bi bi-people-fill"></i>
-                Kullanıcılar</a>
-        </div>
+
         <div class="list-item">
             <a href="/public/pages/addQuestionPage/addQuestion.html">
                 <i class="bi bi-pencil-square"></i>
@@ -44,6 +47,14 @@
             <a href="/public/pages/questionsPage/questions.html">
                 <i class="bi bi-card-list"></i>
                 Sorular</a>
+
+        </div>
+    </div>
+    <div class="logOut">
+        <div class="list-item">
+            <a href="#" onclick="sessionStorage.removeItem('user');location.reload()">
+                <i class="bi bi-box-arrow-left"></i>
+                Çıkış</a>
 
         </div>
     </div>

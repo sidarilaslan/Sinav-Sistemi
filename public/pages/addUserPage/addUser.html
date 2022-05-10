@@ -50,8 +50,8 @@
                             </div>
                             <div class="btn-group user-type-btn-group" id="userType" role="group"
                                 aria-label="Basic mixed styles example">
-                                <button type="button" id="userType0" class="btn btn-success">Öğrenci</button>
-                                <button type="button" id="userType1" class="btn btn-success">Öğretmen</button>
+                                <button type="button" id="userType1" class="btn btn-success">Öğrenci</button>
+                                <button type="button" id="userType3" class="btn btn-success">Öğretmen</button>
                                 <button type="button" id="userType2" class="btn btn-success">Admin</button>
                             </div>
                         </form>
@@ -68,10 +68,12 @@
     </div>
     <script src="/public/src/js/jquery-3.6.0.min.js">
     </script>
+    <script src="/public/src/js/main.js">
+    </script>
     <script>
         $(function () {
             $("#nav-placeholder").load("/public/src/Components/navbarComponent.html", function () {
-                $("#nav-placeholder").children().find('.list-item').filter(":contains('Kullanıcı Ekle')").addClass("active");
+                $("#nav-placeholder").addClass("permission-"+getUser().userTypeID).children().find('.list-item').filter(":contains('Kullanıcı Ekle')").addClass("active");
             });
         });
     </script>

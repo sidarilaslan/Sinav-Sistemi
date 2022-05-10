@@ -29,11 +29,6 @@ async function getQuestion(questionID) {
 async function insertQuestion(question, img) {
   return await connectDB().then(async (db) => {
     isThereUploadedImg = img != undefined;
-    console.log(
-      `Insert into tblQuestions OUTPUT Inserted.questionID values('${question.question.questionText}', ${question.question.sectionID}, ${question.question.unitID},${question.question.rightAnswerIndex}` +
-        (isThereUploadedImg ? `,@img,'${img?.mimetype}'` : ",NULL,NULL ") +
-        ")"
-    );
     return await (isThereUploadedImg
       ? db.input("img", Buffer.from(img.data, "binary"))
       : db

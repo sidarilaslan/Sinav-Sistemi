@@ -60,6 +60,26 @@ nav .item-list .list-item.active a {
   background-color: #fff;
 }
 
+nav .item-list .logOut {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background: #262626;
+}
+
+nav .item-list .logOut a {
+  color: red;
+}
+
+nav.permission-1 .item-list .admin-list {
+  display: none;
+}
+
+nav.permission-3 .item-list .teacher-list {
+  display: none;
+}
+
 .body {
   height: 100vh;
   margin-left: auto;

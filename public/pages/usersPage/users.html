@@ -126,10 +126,12 @@
     </div>
     <script src="/public/src/js/jquery-3.6.0.min.js">
     </script>
+    <script src="/public/src/js/main.js">
+    </script>
     <script>
         $(function () {
             $("#nav-placeholder").load("/public/src/Components/navbarComponent.html", function () {
-                $("#nav-placeholder").children().find('.list-item').filter(":contains('Kullanıcılar')").addClass("active");
+                $("#nav-placeholder").addClass("permission-"+getUser().userTypeID).children().find('.list-item').filter(":contains('Kullanıcılar')").addClass("active");
             });
         });
     </script>

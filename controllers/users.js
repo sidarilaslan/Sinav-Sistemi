@@ -34,6 +34,14 @@ async function updateUser(user) {
     )
   ).recordset;
 }
+async function updatePassword(mail, password) {
+  let x = await connectDB();
+  return (
+    await x.query(
+      `Update tblUsers set password='${password}' where mail='${mail}'`
+    )
+  ).recordset;
+}
 async function deleteUser(userID) {
   let x = await connectDB();
   return (await x.query(`Delete from tblUsers where userID = ${userID}`))
@@ -47,4 +55,5 @@ module.exports = {
   insertUser,
   updateUser,
   deleteUser,
+  updatePassword,
 };

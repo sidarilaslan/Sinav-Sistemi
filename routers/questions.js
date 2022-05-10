@@ -9,7 +9,8 @@ router.post("/insert", (req, res) => {
   questionController
     .insertQuestion(JSON.parse(req.body.question), req.files?.image)
     .then((result) => {
-      console.log(result);
+      res.send({ questionID: result });
+      res.end();
     });
 });
 
