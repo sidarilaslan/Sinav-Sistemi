@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  redirectUser();
+  redirectUser([1]);
 
   $.get("/sections/get", function (sections) {
     $.get("/units/get", function (units) {

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  redirectUser();
+  redirectUser([1, 3]);
 
   $.get("/users/get", function (users) {
     $(users).each(function (index) {

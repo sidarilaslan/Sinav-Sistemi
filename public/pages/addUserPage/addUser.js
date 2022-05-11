@@ -1,4 +1,4 @@
-redirectUser();
+redirectUser([1, 3]);
 
 function submit() {
   let user = {
