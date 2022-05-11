@@ -45,6 +45,7 @@
         $(function () {
             $("#nav-placeholder").load("../../src/Components/navbarComponent.html", function () {
                 $("#nav-placeholder").addClass("permission-"+getUser().userTypeID).children().find('.list-item').filter(":contains('Sınava Gir')").addClass("active");
+                if(getUser().image) $("#navbarProfileImage").attr("src", getUser().image)
             });
         });
 

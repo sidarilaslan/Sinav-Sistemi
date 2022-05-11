@@ -13,7 +13,7 @@ router.get("/", (res, req) => {
 
 router.post("/login", (req, res) => {
   userController.searchUser(req.body.mail, req.body.password).then((result) => {
-    res.send(result[0]);
+    res.send(result);
     res.end();
   });
 });

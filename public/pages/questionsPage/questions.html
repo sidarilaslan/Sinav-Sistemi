@@ -102,6 +102,7 @@
         $(function () {
             $("#nav-placeholder").load("/public/src/Components/navbarComponent.html", function () {
                 $("#nav-placeholder").addClass("permission-"+getUser().userTypeID).children().find('.list-item').filter(":contains('Sorular')").addClass("active");
+                if(getUser().image) $("#navbarProfileImage").attr("src", getUser().image)
             });
         });
     </script>

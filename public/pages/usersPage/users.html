@@ -137,6 +137,7 @@
         $(function () {
             $("#nav-placeholder").load("/public/src/Components/navbarComponent.html", function () {
                 $("#nav-placeholder").addClass("permission-"+getUser().userTypeID).children().find('.list-item').filter(":contains('Kullanıcılar')").addClass("active");
+                if(getUser().image) $("#navbarProfileImage").attr("src", getUser().image);
             });
         });
     </script>

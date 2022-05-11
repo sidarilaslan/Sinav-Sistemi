@@ -26,6 +26,14 @@ router.post("/update", (req, res) => {
       res.end();
     });
 });
+router.post("/updateProfile", (req, res) => {
+  userController
+    .updateUserProfile(JSON.parse(req.body.user), req.files?.image)
+    .then((result) => {
+      res.send(result);
+      res.end();
+    });
+});
 router.post("/delete", (req, res) => {
   userController.deleteUser(req.body.userID).then((result) => {
     res.send(result);

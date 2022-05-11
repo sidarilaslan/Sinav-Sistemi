@@ -27,11 +27,17 @@ async function getUser(key, value) {
 }
 async function searchUser(mail, password) {
   let x = await connectDB();
-  return (
-    await x.query(
+  return await x
+    .query(
       `SELECT * FROM tblUsers WHERE mail = '${mail}' AND password = '${password}'`
     )
-  ).recordset;
+    .then((result) => {
+      if (result.recordset[0]?.image != null)
+        result.recordset[0].image = `data:${
+          result.recordset[0].imageMimeType
+        };base64,${result.recordset[0].image.toString("base64")}`;
+      return result.recordset[0];
+    });
 }
 async function insertUser(user, image) {
   return await connectDB().then(async (db) => {
@@ -64,6 +70,21 @@ async function updateUser(user, image) {
     );
   });
 }
+async function updateUserProfile(user, image) {
+  return await connectDB().then(async (db) => {
+    let isThereUploadedImg = image != undefined;
+    return await (isThereUploadedImg
+      ? db.input("img", Buffer.from(image.data, "binary"))
+      : db
+    ).query(
+      `Update tblUsers set password='${user.password}'` +
+        (isThereUploadedImg
+          ? `, imageMimeType='${image?.mimetype}', image=@img `
+          : " ") +
+        `where userID=${user.userID}`
+    );
+  });
+}
 async function updatePassword(mail, password) {
   let x = await connectDB();
   return (
@@ -86,4 +107,5 @@ module.exports = {
   updateUser,
   deleteUser,
   updatePassword,
+  updateUserProfile,
 };

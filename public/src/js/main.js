@@ -11,3 +11,9 @@ function redirectUser(notPermission = [], defLocation = "/") {
     location.replace("/public/pages/profilePage/profile.html");
   }
 }
+function resetUserStorage() {
+  $.get("/users/get/userID/" + getUser().userID, function (user) {
+    localStorage.setItem("user", JSON.stringify(user));
+    return user;
+  });
+}
