@@ -1,5 +1,4 @@
 const express = require("express");
-const bufferImage = require("buffer-image");
 const fileUpload = require("express-fileupload");
 const { questionController } = require("../controllers/index");
 const router = express.Router();

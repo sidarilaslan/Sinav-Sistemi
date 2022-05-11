@@ -15,9 +15,21 @@ function submit() {
   clean();
 }
 function addUser(user) {
-  $.post("/users/insert", user, function (data) {
-    alert("Bu kullanıcı eklendi.");
-    location.reload();
+  let formData = new FormData();
+  let file_data = $("#file")[0].files[0];
+  console.log(file_data);
+  formData.append("image", file_data);
+  formData.append("user", JSON.stringify(user));
+
+  $.ajax({
+    url: "/users/insert",
+    type: "POST",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (data) {
+      alert("Kullanıcı eklendi.");
+    },
   });
 }
 function clean() {
@@ -27,4 +39,6 @@ function clean() {
   $("#userPassword").val("");
   $("#userTC").val("");
   $("#userType").children().removeClass("active");
+  $("#file").val("");
+  $("#userImg").css("background-image", "none");
 }

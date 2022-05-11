@@ -33,8 +33,42 @@
             padding: 20px;
 
             .thumb {
-                img {
-                    width: 100%;
+                .user-img {
+                    height: 100%;
+                    background-size: cover;
+                    background-position: center;
+                    .image-picker {
+                        cursor: pointer;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 100%;
+                        font-size: 64px;
+                        background-color: rgba(200, 200, 200, 0.4);
+                        label{
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            margin: 0;
+                            padding: 0;
+                            font-size: 84px;
+                        }
+                        input{
+                            display: none;
+                        }
+                        i {
+                            transition-duration: 0.5s;
+                        }
+
+                        &:hover {
+                            i {
+                                transform: scale(1.2);
+                            }
+                        }
+
+                    }
                 }
             }
 

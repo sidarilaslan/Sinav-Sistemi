@@ -28,7 +28,7 @@ async function getQuestion(questionID) {
 }
 async function insertQuestion(question, img) {
   return await connectDB().then(async (db) => {
-    isThereUploadedImg = img != undefined;
+    let isThereUploadedImg = img != undefined;
     return await (isThereUploadedImg
       ? db.input("img", Buffer.from(img.data, "binary"))
       : db
@@ -48,9 +48,10 @@ async function insertQuestion(question, img) {
       });
   });
 }
+
 async function updateQuestion(question, img) {
   return await connectDB().then(async (db) => {
-    isThereUploadedImg = img != undefined;
+    let isThereUploadedImg = img != undefined;
 
     return await (img != undefined
       ? db.input("img", Buffer.from(img.data, "binary"))

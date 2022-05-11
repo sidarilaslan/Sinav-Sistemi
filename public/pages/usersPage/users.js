@@ -7,7 +7,11 @@ $(document).ready(function () {
         `<tr class="candidates-list">
                     <td class="title">
                         <div class="thumb">
-                            <img class="img-fluid" src="https://i.hizliresim.com/ii8tvbv.png" alt="">
+                            <img class="img-fluid" src="${
+                              this.image != null
+                                ? this.image
+                                : "/public/src/img/No_image_available.svg.png"
+                            }" alt="">
                         </div>
                         <div class="candidate-list-details">
                             <div class="candidate-list-info">
@@ -51,7 +55,7 @@ $(document).ready(function () {
 function openViewModal(userID, modalType) {
   toggleUserViewModal();
   $.get("/users/get/userID/" + userID, function (user) {
-    setViewModal(user[0], modalType);
+    setViewModal(user, modalType);
     $("#btnSubmitViewModal").attr(
       "onClick",
       'submitViewModal("' +
@@ -75,6 +79,9 @@ function setViewModal(user, modalType) {
   $("#userTC").val(user.tcNO).attr("disabled", isDisabled);
   $("#userType" + user.userTypeID).addClass("active");
   $("#userType").children().attr("disabled", isDisabled);
+  if (user.image != null)
+    $("#userImg").css("background-image", "url(" + user.image + ")");
+
   if (modalType == "remove") {
     setTimeout(function () {
       removeAlert(user.userID);
@@ -102,9 +109,19 @@ function submitViewModal(modalType, userID) {
   $("#userType").children().removeClass("active");
 }
 function editUser(user) {
-  $.post("/users/update", user, function (data) {
-    alert("Bu kullanıcı düzenlendi.");
-    location.reload();
+  let formData = new FormData();
+  let file_data = $("#file")[0].files[0];
+  formData.append("image", file_data);
+  formData.append("user", JSON.stringify(user));
+  $.ajax({
+    url: "/users/update",
+    type: "POST",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (data) {
+      location.reload();
+    },
   });
 }
 function removeAlert(userID) {

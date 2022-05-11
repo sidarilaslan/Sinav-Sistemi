@@ -23,10 +23,15 @@
         <div id="userViewModal" class="user-dashboard-info-box table-responsive mb-0 user-view-modal show">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3 thumb">
-                        <img class="img-fluid" id="userImg" src="https://i.hizliresim.com/ii8tvbv.png" alt="">
+                    <div class="col-md-4 thumb">
+                        <div id="userImg" class="user-img">
+                            <div class="image-picker">
+                                <label for="file" class="btn"><i class="bi bi-upload"></i></label>
+                                <input  type="file" id="file" name="file" onchange="document.getElementById('userImg').style.backgroundImage ='url('+ window.URL.createObjectURL(this.files[0])+')'"/>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-8">
                         <form>
                             <div class="form-floating mb-4">
                                 <input type="text" class="form-control" id="userName" placeholder="Adı">

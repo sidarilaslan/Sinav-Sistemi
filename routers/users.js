@@ -1,6 +1,8 @@
 const express = require("express");
+const fileUpload = require("express-fileupload");
 const { userController } = require("../controllers/index");
 const router = express.Router();
+router.use(fileUpload());
 
 router.get("/get", (req, res) => {
   userController.getUsers().then((result) => {
@@ -9,16 +11,20 @@ router.get("/get", (req, res) => {
   });
 });
 router.post("/insert", (req, res) => {
-  userController.insertUser(req.body).then((result) => {
-    res.send(result);
-    res.end();
-  });
+  userController
+    .insertUser(JSON.parse(req.body.user), req.files?.image)
+    .then((result) => {
+      res.send(result);
+      res.end();
+    });
 });
 router.post("/update", (req, res) => {
-  userController.updateUser(req.body).then((result) => {
-    res.send(result);
-    res.end();
-  });
+  userController
+    .updateUser(JSON.parse(req.body.user), req.files?.image)
+    .then((result) => {
+      res.send(result);
+      res.end();
+    });
 });
 router.post("/delete", (req, res) => {
   userController.deleteUser(req.body.userID).then((result) => {

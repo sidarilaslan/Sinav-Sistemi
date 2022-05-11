@@ -154,7 +154,7 @@ function submitQuestion(questionID, modalType) {
         location.reload();
       },
     });
-  }
+  } else toggleUserViewModal();
 }
 function removeAlert(questionID) {
   if (confirm("Bu soruyu silmeye emin misiniz?")) {
