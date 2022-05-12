@@ -76,32 +76,24 @@ body {
             display: flex;
             flex-wrap: wrap;
 
+            .btn-group-vertical {
+                width: 100%;
+
                 .btn {
                     cursor: pointer;
                     margin-top: 10px;
                     font-size: 18px;
                     text-align: left;
-                &.active{
-                    background-color: #0e8ccc4a;
-                    &.rightAnswer{
-                        background-color: green;
-                    }
-                }
-                &.rightAnswer{
-                    background-color: #008000a6;
-                }
-                &.false{
-                    background-color: #ff0000a1;
-                }
-                &:focus {
-                    box-shadow: 0 0 0 0.25rem rgba(0, 0, 255, 0.1);
-                }
-                }
-                &.null{
-                    .rightAnswer{
+
+                    &.active {
                         background-color: #0e8ccc4a;
                     }
+
+                    &:focus {
+                        box-shadow: 0 0 0 0.25rem rgba(0, 0, 255, 0.1);
+                    }
                 }
+            }
 
         }
     }

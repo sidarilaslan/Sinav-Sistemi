@@ -2,11 +2,24 @@ const { connectDB } = require("../loaders/db");
 
 async function getQuestions() {
   let x = await connectDB();
-  return (
-    await x.query(
+  return await x
+    .query(
       "SELECT * FROM tblQuestions Q INNER JOIN tblSections S on Q.sectionID = S.sectionID INNER JOIN tblUnits U on Q.unitID = U.unitID"
     )
-  ).recordset;
+    .then((result) => {
+      return x.query(`SELECT * FROM tblAnswers`).then((answers) => {
+        result.recordset.forEach((question) => {
+          question.answers = answers.recordset.filter(
+            (answer) => answer.questionID == question.questionID
+          );
+          if (question.image != null)
+            question.image = `data:${
+              question.imageMimeType
+            };base64,${question.image.toString("base64")}`;
+        });
+        return result.recordset;
+      });
+    });
 }
 
 async function getQuestion(questionID) {
@@ -17,7 +30,6 @@ async function getQuestion(questionID) {
         `SELECT * FROM tblQuestions Q INNER JOIN tblAnswers A on Q.questionID = A.questionID INNER JOIN tblSections S on Q.sectionID = S.sectionID INNER JOIN tblUnits U on Q.unitID = U.unitID where Q.questionID='${questionID}'`
       )
       .then((result) => {
-        console.log(result.recordset[0].image);
         if (result.recordset[0].image != null)
           result.recordset[0].image = `data:${
             result.recordset[0].imageMimeType

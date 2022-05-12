@@ -1,18 +1,18 @@
-function getUser() {
+function USERLOGDATA() {
   return JSON.parse(localStorage.getItem("user"));
 }
 function isLoggedIn() {
-  return getUser()?.userTypeID != null;
+  return USERLOGDATA()?.userTypeID != null;
 }
 function redirectUser(notPermission = [], defLocation = "/") {
   if (!isLoggedIn()) {
     location.replace(defLocation);
-  } else if (notPermission.includes(getUser().userTypeID)) {
+  } else if (notPermission.includes(USERLOGDATA().userTypeID)) {
     location.replace("/public/pages/profilePage/profile.html");
   }
 }
 function resetUserStorage() {
-  $.get("/users/get/userID/" + getUser().userID, function (user) {
+  $.get("/users/get/userID/" + USERLOGDATA().userID, function (user) {
     localStorage.setItem("user", JSON.stringify(user));
     return user;
   });

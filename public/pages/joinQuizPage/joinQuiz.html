@@ -23,7 +23,10 @@
             <div class="card-body text-center">
                 <h5 class="card-title">Konu tarama testi</h5>
                 <p class="card-text">Kendini geliştirmek istediğin konu sorularını çöz ve kendini geliştir.</p>
-                <a href="../quizModule/quiz.html" class="btn btn-primary w-100">Konu Tarama Testi</a>
+                <select id="sectionsSelect" class="form-select" aria-label="Konu Secin">
+                    <option selected>Konu Seçin</option>
+                </select>
+                <button id="sectionQuizButton" disabled onclick="sectionQuizSubmit()" class="btn btn-primary w-100">Konu Tarama Testi</button>
             </div>
         </div>
         <div class="card">
@@ -44,8 +47,8 @@
     <script>
         $(function () {
             $("#nav-placeholder").load("../../src/Components/navbarComponent.html", function () {
-                $("#nav-placeholder").addClass("permission-"+getUser().userTypeID).children().find('.list-item').filter(":contains('Sınava Gir')").addClass("active");
-                if(getUser().image) $("#navbarProfileImage").attr("src", getUser().image)
+                $("#nav-placeholder").addClass("permission-"+USERLOGDATA().userTypeID).children().find('.list-item').filter(":contains('Sınava Gir')").addClass("active");
+                if(USERLOGDATA().image) $("#navbarProfileImage").attr("src", USERLOGDATA().image)
             });
         });
 

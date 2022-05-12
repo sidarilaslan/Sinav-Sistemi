@@ -77,8 +77,8 @@
     <script>
         $(function () {
             $("#nav-placeholder").load("/public/src/Components/navbarComponent.html", function () {
-                $("#nav-placeholder").addClass("permission-"+getUser().userTypeID).children().find('.list-item').filter(":contains('Profil')").addClass("active");
-                if(getUser().image) $("#navbarProfileImage").attr("src", getUser().image)
+                $("#nav-placeholder").addClass("permission-"+USERLOGDATA().userTypeID).children().find('.list-item').filter(":contains('Profil')").addClass("active");
+                if(USERLOGDATA().image) $("#navbarProfileImage").attr("src", USERLOGDATA().image)
             });
         });
     </script>

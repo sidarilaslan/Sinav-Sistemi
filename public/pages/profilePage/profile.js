@@ -1,17 +1,17 @@
 $(document).ready(function () {
   redirectUser();
-  $("#userName").val(getUser().name);
-  $("#userSurname").val(getUser().surname);
-  $("#userMail").val(getUser().mail);
-  $("#userPassword").val(getUser().password);
-  $("#userTC").val(getUser().tcNO);
-  $("#userType" + getUser().userTypeID).addClass("active");
-  if (getUser().image != null)
-    $("#userImg").css("background-image", "url(" + getUser().image + ")");
+  $("#userName").val(USERLOGDATA().name);
+  $("#userSurname").val(USERLOGDATA().surname);
+  $("#userMail").val(USERLOGDATA().mail);
+  $("#userPassword").val(USERLOGDATA().password);
+  $("#userTC").val(USERLOGDATA().tcNO);
+  $("#userType" + USERLOGDATA().userTypeID).addClass("active");
+  if (USERLOGDATA().image != null)
+    $("#userImg").css("background-image", "url(" + USERLOGDATA().image + ")");
 });
 function submit() {
   let user = {
-    userID: getUser().userID,
+    userID: USERLOGDATA().userID,
     password: $("#userPassword").val(),
   };
   let formData = new FormData();
