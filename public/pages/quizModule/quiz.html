@@ -12,13 +12,20 @@
   </head>
 
   <body class="text-center">
-    <div class="container">
+    <div class="main-container container">
       <div class="header">
-        <h3>Aşağıdaki soruları cevaplayınız.</h3>
+        <h3 id="headerText">Aşağıdaki soruları cevaplayınız.</h3>
+        <p id="headerSubText">
+          Süre bitiminde sınav otomatik olarak gönderilecektir.
+        </p>
+        <div id="timer" class="timer" data-seconds-left></div>
       </div>
-      <div id="timer" class="timer" data-seconds-left></div>
       <div id="quizContainer" class="container quiz-container"></div>
-      <button onclick="submit()" class="btn btn-primary">Sınavı Bitir</button>
+      <div id="footer" class="footer">
+        <button id="submitButton" onclick="submit()" class="btn btn-primary">
+          Sınavı Bitir
+        </button>
+      </div>
     </div>
 
     <script src="/public/src/js/jquery-3.6.0.min.js"></script>

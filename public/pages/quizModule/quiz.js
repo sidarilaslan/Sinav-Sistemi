@@ -1,27 +1,70 @@
 $(document).ready(function () {
   let QUESTIONCOUNT = 2;
-  let QUESTIONTIME = 5; //seconds
+  let QUESTIONTIME = 500; //seconds
   if (location.pathname.replace("/quiz/", "").includes("view")) {
     let quizID = location.pathname.replace("/quiz/view/", "");
     console.log("quizID: " + quizID);
+    $.get("/quiz/get/quizzes/" + USERLOGDATA().userID, function (result) {
+      let quizInfo = result.filter((x) => x.quizID == quizID)[0];
+      let date = {
+        year: quizInfo.date.split("-")[0],
+        month: quizInfo.date.split("-")[1],
+        day: quizInfo.date.split("-")[2].split("T")[0],
+        hour: quizInfo.date.split("-")[2].split("T")[1].split(":")[0],
+        minute: quizInfo.date.split("-")[2].split("T")[1].split(":")[1],
+      };
+      $("#headerText").text("Sınav Sonuçları");
+      $("#headerSubText").remove();
+      $("#submitButton").remove();
+      $("#timer").remove();
+      $("#footer").append(
+        `<div class="quiz-result">
+          <table class="table">
+            <thead class="head">
+              <tr>
+                <th class="text-center">Doğru</th>
+                <th class="text-center">Yanlış</th>
+                <th class="text-center">Boş</th>
+                <th class="text-center">Tarih</th>
+              </tr>
+            </thead>
+            <tbody class="body">
+              <tr>
+                <td class="text-center correct">${quizInfo.correctCount}</td>
+                <td class="text-center uncorrect">${
+                  quizInfo.uncorrectCount
+                }</td>
+                <td class="text-center null">${quizInfo.nullCount}</td>
+                <td class="text-center date">${
+                  date.year +
+                  "-" +
+                  date.month +
+                  "-" +
+                  date.day +
+                  " " +
+                  date.hour +
+                  ":" +
+                  date.minute
+                }</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>`
+      );
+    });
     $.get("/quiz/get/quiz/" + quizID, async function (result) {
       let quizQuestionsID = result.filter((quiz) => quiz.quizID == quizID);
-      let questions = [];
-      console.log(quizQuestionsID);
       let index = 0;
       for (let quizQuestion of quizQuestionsID) {
         await $.get(
           "/questions/getv2/" + quizQuestion.questionID,
           function (question) {
             question.userAnswer = quizQuestion.answerIndex;
-            questions.push(question);
             addToHTMLList(question, index, false);
             index++;
           }
         );
       }
-      console.log(questions);
-      console.log(quizQuestionsID);
     });
   } else if (location.pathname.replace("/quiz/", "").includes("section")) {
     let quizSectionID = location.pathname.replace("/quiz/section/", "");
