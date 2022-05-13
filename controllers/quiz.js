@@ -8,6 +8,16 @@ async function getUserQuizzes(userID) {
       return result.recordset;
     });
 }
+async function getQuizQuestions(quizID) {
+  return await connectDB().then((db) => {
+    return db
+      .query(`SELECT * FROM tblQuizQuestions where quizID =${quizID}`)
+      .then((result) => {
+        console.log(result.recordset);
+        return result.recordset;
+      });
+  });
+}
 
 async function insertQuiz(quiz) {
   return await connectDB().then(async (db) => {
@@ -17,7 +27,6 @@ async function insertQuiz(quiz) {
       )
       .then((result) => {
         let quizID = result.recordset[0].quizID;
-        console.log(quiz.answers);
         quiz.answers.forEach((answer) => {
           db.query(
             `Insert into tblQuizQuestions values(${quizID},${answer.questionID},${answer.answerIndex})`
@@ -39,4 +48,5 @@ async function insertQuiz(quiz) {
 module.exports = {
   insertQuiz,
   getUserQuizzes,
+  getQuizQuestions,
 };

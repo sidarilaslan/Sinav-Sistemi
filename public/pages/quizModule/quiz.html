@@ -1,39 +1,29 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Giriş Yap</title>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Giriş Yap</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/public/src/css/bootstrap.min.css" rel="stylesheet" />
 
-  <!-- Bootstrap core CSS -->
-  <link href="/public/src/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/pages/quizModule/quiz.css" rel="stylesheet" />
+  </head>
 
-  <link href="/public/pages/quizModule/quiz.css" rel="stylesheet">
-</head>
+  <body class="text-center">
+    <div class="container">
+      <div class="header">
+        <h3>Aşağıdaki soruları cevaplayınız.</h3>
+      </div>
+      <div id="timer" class="timer" data-seconds-left></div>
+      <div id="quizContainer" class="container quiz-container"></div>
+      <button onclick="submit()" class="btn btn-primary">Sınavı Bitir</button>
+    </div>
 
-<body class="text-center">
-  <h3>Aşağıdaki soruları cevaplayınız.</h3>
-  <div id="timer" class="timer" data-seconds-left></div>
-  <div id="quizContainer" class="container quiz-container">
-    
-   
-   
-
-
-
-  </div>
-  <button onclick="submit()" class="btn btn-primary">Sınavı Bitir</button>
-  <script src="/public/src/js/jquery-3.6.0.min.js">
-  </script>
-  <script src="/public/pages/quizModule/jquery.simple.timer.js">
-  </script>
-  <script src="/public/src/js/main.js">
-
-  </script>
-  <script src="/public/pages/quizModule/quiz.js">
-  </script>
-</body>
-
-
+    <script src="/public/src/js/jquery-3.6.0.min.js"></script>
+    <script src="/public/pages/quizModule/jquery.simple.timer.js"></script>
+    <script src="/public/src/js/main.js"></script>
+    <script src="/public/pages/quizModule/quiz.js"></script>
+  </body>
 </html>

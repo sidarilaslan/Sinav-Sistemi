@@ -38,6 +38,27 @@ async function getQuestion(questionID) {
       })
   ).recordset;
 }
+async function getQuestionV2(questionID) {
+  return await connectDB().then((db) => {
+    return db
+      .query(
+        `SELECT * FROM tblQuestions Q INNER JOIN tblSections S on Q.sectionID = S.sectionID INNER JOIN tblUnits U on Q.unitID = U.unitID where Q.questionID=${questionID}`
+      )
+      .then((question) => {
+        if (question.recordset[0].image != null)
+          question.recordset[0].image = `data:${
+            question.recordset[0].imageMimeType
+          };base64,${question.recordset[0].image.toString("base64")}`;
+
+        return db
+          .query(`SELECT * FROM tblAnswers where questionID=${questionID}`)
+          .then((answers) => {
+            question.recordset[0].answers = answers.recordset;
+            return question.recordset[0];
+          });
+      });
+  });
+}
 async function insertQuestion(question, img) {
   return await connectDB().then(async (db) => {
     let isThereUploadedImg = img != undefined;
@@ -100,4 +121,5 @@ module.exports = {
   insertQuestion,
   deleteQuestion,
   updateQuestion,
+  getQuestionV2,
 };

@@ -25,6 +25,12 @@ router.get("/get/:questionID", (req, res) => {
     res.end();
   });
 });
+router.get("/getv2/:questionID", (req, res) => {
+  questionController.getQuestionV2(req.params.questionID).then((result) => {
+    res.send(result);
+    res.end();
+  });
+});
 router.post("/delete", (req, res) => {
   questionController.deleteQuestion(req.body.questionID).then((result) => {
     res.send(result);

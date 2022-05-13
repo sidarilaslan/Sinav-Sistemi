@@ -1,28 +1,27 @@
 .body {
     position: relative;
     background-color: white;
-
+    overflow-y: auto;
     .quizzes-list {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100%;
         padding: 0 10%;
 
         .table {
             box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
 
-            .quiz-head {}
+            // .quiz-head {}
 
-            .quizzes-body {
-                .quiz-item {
-                    .actions {
-                        a {
-                            // margin: 0 10px;
-                        }
-                    }
-                }
-            }
+            // .quizzes-body {
+            //     .quiz-item {
+            //         .actions {
+            //             a {
+            //                 // margin: 0 10px;
+            //             }
+            //         }
+            //     }
+            // }
         }
     }
 

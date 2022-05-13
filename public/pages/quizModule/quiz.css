@@ -116,7 +116,7 @@ body {
 }
 
 .quiz-container .question-item .question-stylish .btn.active.rightAnswer {
-  background-color: green;
+  background-color: #008000a6;
 }
 
 .quiz-container .question-item .question-stylish .btn.rightAnswer {

@@ -1,6 +1,6 @@
 $(document).ready(function () {
   redirectUser();
-  $.get("/quiz/get/" + USERLOGDATA().userID, function (result) {
+  $.get("/quiz/get/quizzes/" + USERLOGDATA().userID, function (result) {
     console.log(result);
     let date;
     result.forEach((quiz) => {
@@ -47,4 +47,5 @@ $(document).ready(function () {
 });
 function getQuiz(quizID) {
   console.log(quizID);
+  window.open("/quiz/view/" + quizID);
 }
