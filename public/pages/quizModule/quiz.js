@@ -1,9 +1,8 @@
 $(document).ready(function () {
-  let QUESTIONCOUNT = 2;
-  let QUESTIONTIME = 500; //seconds
+  let QUESTIONCOUNT = 5;
+  let QUESTIONTIME = 2; //seconds
   if (location.pathname.replace("/quiz/", "").includes("view")) {
     let quizID = location.pathname.replace("/quiz/view/", "");
-    console.log("quizID: " + quizID);
     $.get("/quiz/get/quizzes/" + USERLOGDATA().userID, function (result) {
       let quizInfo = result.filter((x) => x.quizID == quizID)[0];
       let date = {
@@ -99,6 +98,7 @@ $(document).ready(function () {
   }
 });
 function addToHTMLList(question, index, isAnswerRandom = true) {
+  if (index == 1) console.log(question.questionText);
   let stylishHTMLElement = "";
   let answers = isAnswerRandom
     ? selectRandomItems(question.answers, question.answers.length)
@@ -125,19 +125,22 @@ function addToHTMLList(question, index, isAnswerRandom = true) {
 
   $("#quizContainer").append(`<div class="container question-item">
         <span class="question-number">${index + 1}</span>
-        <div class="question-head">
-          <div class="question-img">
-          ${question.image != null ? "<img src='" + question.image + "'>" : ""}
-          </div>
-          <div class="question-text-area">
-            <div class="question-subject">
+        <div class="question-subject">
               <span>${question.sectionName} </span>|<span> ${
     question.unitName
   }</span>
             </div>
-            <div class="question-text">
-            ${question.questionText}
-            </div>
+        <div class="question-head">
+          ${
+            question.image != null
+              ? "<div class='question-img'> <img src='" +
+                question.image +
+                "'> </div>"
+              : ""
+          }
+          
+          <div class="question-text-area">
+            <div class="question-text">${question.questionText}</div>
           </div>
         </div>
         <div class="question-stylish ${
@@ -200,6 +203,8 @@ function submit() {
     }-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`,
     answers: JSON.stringify(answers),
   };
+  sessionStorage.removeItem("quiz");
+  sessionStorage.removeItem("questions");
   $.post("/quiz/insert", quiz, function (result) {
     location.replace("/quiz/view/" + result.quizID); //Sınavdan sonra sonuçların hemen gözükmesi için
   });

@@ -1,53 +1,52 @@
 .body {
-    position: relative;
-    background-color: white;
-    overflow-y: auto;
-    .quizzes-list {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0 10%;
+  position: relative;
+  background-color: white;
+  overflow-y: auto;
+  .quizzes-list {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    .container-fluid {
+      width: 80%;
+      max-height: 50%;
+      overflow-y: auto;
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
 
-        .table {
-            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
-
-            // .quiz-head {}
-
-            // .quizzes-body {
-            //     .quiz-item {
-            //         .actions {
-            //             a {
-            //                 // margin: 0 10px;
-            //             }
-            //         }
-            //     }
-            // }
+      .table {
+        .actions {
+          .text-primary {
+            color: #d0368a !important;
+          }
         }
+      }
     }
+  }
 
-    .question-edit-modal {
-        display: none;
+  .question-edit-modal {
+    display: none;
+    position: absolute;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    .add-question-card {
+      position: relative;
+
+      .btn-close {
         position: absolute;
-        top: 0;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        width: 100%;
-
-        .add-question-card {
-            position: relative;
-
-            .btn-close {
-                position: absolute;
-                top: -20px;
-                right: 0px;
-            }
-        }
-
-
-        &.show {
-            display: flex;
-            opacity: 1;
-        }
+        top: -20px;
+        right: 0px;
+      }
     }
+
+    &.show {
+      display: flex;
+      opacity: 1;
+    }
+  }
 }

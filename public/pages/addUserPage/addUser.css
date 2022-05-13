@@ -36,6 +36,7 @@
   background-color: white;
   -webkit-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
           box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
+  width: 90%;
 }
 
 .body .user-view-modal .container .btn-close {
@@ -123,7 +124,13 @@
 }
 
 .body .user-view-modal .container .footer {
-  margin-bottom: 10px;
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .body .user-view-modal .container .footer .btn {
@@ -131,7 +138,8 @@
 }
 
 .body .user-view-modal .container .footer .close-user-view-modal {
-  float: right;
+  padding: 5px 40px;
+  margin-left: auto;
 }
 
 .mb-0,

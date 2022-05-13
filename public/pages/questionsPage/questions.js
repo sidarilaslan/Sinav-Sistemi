@@ -24,9 +24,9 @@ $(document).ready(function () {
                                 <p>${this.unitName}</p>
                             </td>
                             <td class="actions text-end">
-                                <a href="#" onclick="openViewModal('${this.questionID}', 'view')" class="text-primary" data-toggle="tooltip" title=""
+                                <a href="#" onclick="openViewModal('${this.questionID}', 'view')" class="view" data-toggle="tooltip" title=""
                                     data-original-title="view"><i class="bi bi-eye-fill"></i></a>
-                                <a href="#" onclick="openViewModal('${this.questionID}', 'edit')" class="text-info" data-toggle="tooltip" title="" data-original-title="Edit"><i
+                                <a href="#" onclick="openViewModal('${this.questionID}', 'edit')" class="edit" data-toggle="tooltip" title="" data-original-title="Edit"><i
                                         class="bi bi-pencil-fill"></i></a>
                                 <a href="#" onclick="openViewModal('${this.questionID}', 'remove')" class="text-danger" data-toggle="tooltip" title=""
                                     data-original-title="Delete"><i class="bi bi-trash3-fill"></i></a>

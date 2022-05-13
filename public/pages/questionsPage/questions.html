@@ -1,115 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ana Sayfa</title>
 
-    <link href="/public/src/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/public/src/css/navbar.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../quizModule/quiz.css">
-    <link rel="stylesheet" href="/public/pages/addQuestionPage/addQuestion.css">
-    <link rel="stylesheet" href="/public/pages/questionsPage/questions.css">
+    <link href="/public/src/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/public/src/css/navbar.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+    />
 
-</head>
+    <link
+      rel="stylesheet"
+      href="/public/pages/addQuestionPage/addQuestion.css"
+    />
+    <link rel="stylesheet" href="/public/pages/questionsPage/questions.css" />
+  </head>
 
-<body>
-    <nav class="col-md-2" id="nav-placeholder">
-    </nav>
+  <body>
+    <nav class="col-md-2" id="nav-placeholder"></nav>
     <div class="col-md-10 body">
-        <div class="container questions-list">
-            <table class="table">
-                <thead class="questions-head">
-                    <tr>
-                        <th>Id</th>
-                        <th>Soru</th>
-                        <th class="text-end">Konu</th>
-                        <th class="text-end">Unite</th>
-                        <th class="text-end">Aksiyon</th>
-                    </tr>
-                </thead>
-                <tbody id="questionList" class="questions-body">
-                </tbody>
-            </table>
+      <div class="container questions-list">
+        <div class="container-fluid">
+          <table class="table">
+            <thead class="questions-head">
+              <tr>
+                <th>Id</th>
+                <th>Soru</th>
+                <th class="text-end">Konu</th>
+                <th class="text-end">Unite</th>
+                <th class="text-end">Aksiyon</th>
+              </tr>
+            </thead>
+            <tbody id="questionList" class="questions-body"></tbody>
+          </table>
         </div>
+      </div>
 
-        <div id="questionViewModal" class="question-edit-modal fade">
-            <div class="question-body">
-                <div class="add-question-card">
-                    <button type="button" class="btn-close" onclick="toggleUserViewModal()" aria-label="Close"></button>
-                    <div class="quiz-container">
-                        <div class="question-item">
-                            <div class="question-head">
-                                <div id="questionImg" class="question-img">
-                                    <div class="image-picker">
-                                        <label for="file" class="btn"><i class="bi bi-upload"></i></label>
-                                        <input  type="file" id="file" name="file" onchange="document.getElementById('questionImg').style.backgroundImage ='url('+ window.URL.createObjectURL(this.files[0])+')'"/>
-                                    </div>
-                                </div>
-                                <div class="question-text-area">
-                                    <div class="question-subject">
-                                        <select id="section" class="form-control">
-                                            <option selected>Ders Seçiniz</option>
-                                        </select>
-                                        <select id="unit" class="form-control">
-                                            <option selected>Konu Seçiniz</option>
-                                        </select>
-                                    </div>
-                                    <div class="question-text">
-                                        <textarea class="form-control text-area" rows="7" id="questionText"
-                                            placeholder="Sorunuzu buraya yazabilirsiniz."></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="question-stylish" id="answers">
-                                <div class="stylish">
-                                    <label for="answer0" class="col-form-label">A)</label>
-                                    <input type="text" class="form-control" id="answer0" placeholder="Şıkkı doldurun.">
-                                </div>
-                                <div class="stylish">
-                                    <label for="answer1" class="col-form-label">B)</label>
-                                    <input type="text" class="form-control" id="answer1" placeholder="Şıkkı doldurun.">
-                                </div>
-                                <div class="stylish">
-                                    <label for="answer2" class="col-form-label">C)</label>
-                                    <input type="text" class="form-control" id="answer2" placeholder="Şıkkı doldurun.">
-                                </div>
-                                <div class="stylish">
-                                    <label for="answer3" class="col-form-label">D)</label>
-                                    <input type="text" class="form-control" id="answer3" placeholder="Şıkkı doldurun.">
-                                </div>
-                            </div>
-                            <div class="submit-button">
-                                <button type="submit" class="btn btn-danger" id="btnDeleteQuestion"><i
-                                        class="bi bi-trash3-fill"></i> Sil</button>
-                                <button type="submit" id="btnSubmitQuestion" class="btn btn-primary">Tamam</button>
-                            </div>
-                        </div>
+      <div id="questionViewModal" class="question-edit-modal fade">
+        <div class="question-body">
+          <div class="add-question-card">
+            <button
+              type="button"
+              class="btn-close"
+              onclick="toggleUserViewModal()"
+              aria-label="Close"
+            ></button>
+            <div class="quiz-container">
+              <div class="question-item">
+                <div class="question-head">
+                  <div id="questionImg" class="question-img">
+                    <div class="image-picker">
+                      <label for="file" class="btn"
+                        ><i class="bi bi-upload"></i
+                      ></label>
+                      <input
+                        type="file"
+                        id="file"
+                        name="file"
+                        onchange="document.getElementById('questionImg').style.backgroundImage ='url('+ window.URL.createObjectURL(this.files[0])+')'"
+                      />
                     </div>
+                  </div>
+                  <div class="question-text-area">
+                    <div class="question-subject">
+                      <select id="section" class="form-control">
+                        <option selected>Ders Seçiniz</option>
+                      </select>
+                      <select id="unit" class="form-control">
+                        <option selected>Konu Seçiniz</option>
+                      </select>
+                    </div>
+                    <div class="question-text">
+                      <textarea
+                        class="form-control text-area"
+                        rows="7"
+                        id="questionText"
+                        placeholder="Sorunuzu buraya yazabilirsiniz."
+                      ></textarea>
+                    </div>
+                  </div>
                 </div>
+                <div class="question-stylish" id="answers">
+                  <div class="stylish">
+                    <label for="answer0" class="col-form-label">A)</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="answer0"
+                      placeholder="Şıkkı doldurun."
+                    />
+                  </div>
+                  <div class="stylish">
+                    <label for="answer1" class="col-form-label">B)</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="answer1"
+                      placeholder="Şıkkı doldurun."
+                    />
+                  </div>
+                  <div class="stylish">
+                    <label for="answer2" class="col-form-label">C)</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="answer2"
+                      placeholder="Şıkkı doldurun."
+                    />
+                  </div>
+                  <div class="stylish">
+                    <label for="answer3" class="col-form-label">D)</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="answer3"
+                      placeholder="Şıkkı doldurun."
+                    />
+                  </div>
+                </div>
+                <div class="submit-button">
+                  <button
+                    type="submit"
+                    class="btn btn-danger"
+                    id="btnDeleteQuestion"
+                  >
+                    <i class="bi bi-trash3-fill"></i> Sil
+                  </button>
+                  <button
+                    type="submit"
+                    id="btnSubmitQuestion"
+                    class="btn btn-primary"
+                  >
+                    Tamam
+                  </button>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-
+      </div>
     </div>
-    <script src="/public/src/js/jquery-3.6.0.min.js">
-    </script>
-    <script src="/public/src/js/main.js">
-    </script>
+    <script src="/public/src/js/jquery-3.6.0.min.js"></script>
+    <script src="/public/src/js/main.js"></script>
     <script>
-        $(function () {
-            $("#nav-placeholder").load("/public/src/Components/navbarComponent.html", function () {
-                $("#nav-placeholder").addClass("permission-"+USERLOGDATA().userTypeID).children().find('.list-item').filter(":contains('Sorular')").addClass("active");
-                if(USERLOGDATA().image) $("#navbarProfileImage").attr("src", USERLOGDATA().image)
-            });
-        });
+      $(function () {
+        $("#nav-placeholder").load(
+          "/public/src/Components/navbarComponent.html",
+          function () {
+            $("#nav-placeholder")
+              .addClass("permission-" + USERLOGDATA().userTypeID)
+              .children()
+              .find(".list-item")
+              .filter(":contains('Sorular')")
+              .addClass("active");
+            if (USERLOGDATA().image)
+              $("#navbarProfileImage").attr("src", USERLOGDATA().image);
+          }
+        );
+      });
     </script>
 
-    <script src="questions.js">
-    </script>
-
-</body>
-
+    <script src="questions.js"></script>
+  </body>
 </html>

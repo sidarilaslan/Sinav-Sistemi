@@ -13,12 +13,23 @@
       -ms-flex-align: center;
           align-items: center;
   height: 100%;
-  padding: 0 10%;
+  padding: 0;
 }
 
-.body .questions-list .table {
+.body .questions-list .container-fluid {
+  max-height: 50%;
+  width: 80%;
+  overflow-y: auto;
   -webkit-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
           box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
+}
+
+.body .questions-list .container-fluid .table .questions-body .question-item .actions .view {
+  color: #d0368a;
+}
+
+.body .questions-list .container-fluid .table .questions-body .question-item .actions .edit {
+  color: #708ad4;
 }
 
 .body .question-edit-modal {
@@ -33,13 +44,19 @@
           align-items: center;
   height: 100%;
   width: 100%;
+  background-color: #00000030;
 }
 
-.body .question-edit-modal .add-question-card {
+.body .question-edit-modal .question-body {
+  width: 100%;
+}
+
+.body .question-edit-modal .question-body .add-question-card {
+  background-color: white;
   position: relative;
 }
 
-.body .question-edit-modal .add-question-card .btn-close {
+.body .question-edit-modal .question-body .add-question-card .btn-close {
   position: absolute;
   top: -20px;
   right: 0px;

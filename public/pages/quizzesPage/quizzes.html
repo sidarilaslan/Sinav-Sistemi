@@ -1,40 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ana Sayfa</title>
 
-    <link href="/public/src/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/public/src/css/navbar.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../quizModule/quiz.css">
-    <link rel="stylesheet" href="/public/pages/quizzesPage/quizzes.css">
+    <link href="/public/src/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/public/src/css/navbar.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="/public/pages/quizzesPage/quizzes.css" />
+  </head>
 
-</head>
-
-<body>
-    <nav class="col-md-2" id="nav-placeholder">
-    </nav>
+  <body>
+    <nav class="col-md-2" id="nav-placeholder"></nav>
     <div class="col-md-10 body">
-        <div class="container quizzes-list">
-            <table class="table">
-                <thead class="quiz-head">
-                    <tr>
-                        <th>Id</th>
-                        <th>Sınav Tipi</th>
-                        <th class="text-end">Doğru</th>
-                        <th class="text-end">Yanlış</th>
-                        <th class="text-end">Boş</th>
-                        <th class="text-center">Tarih</th>
-                        <th class="text-end">Aksiyon</th>
-                    </tr>
-                </thead>
-                <tbody id="quizList" class="quizzes-body">
-                   
-                    <!-- <tr>
+      <div class="container-fluid quizzes-list">
+        <div class="container-fluid">
+          <table class="table">
+            <thead class="quiz-head">
+              <tr>
+                <th>Id</th>
+                <th>Sınav Tipi</th>
+                <th class="text-end">Doğru</th>
+                <th class="text-end">Yanlış</th>
+                <th class="text-end">Boş</th>
+                <th class="text-center">Tarih</th>
+                <th class="text-end">Aksiyon</th>
+              </tr>
+            </thead>
+            <tbody id="quizList" class="quizzes-body">
+              <!-- <tr>
                         <td>1</td>
                         <td>Konu Tarama Testi</td>
                         <td class="text-end">3</td>
@@ -46,26 +45,31 @@
                                 data-original-title="view"><i class="bi bi-eye-fill"></i></a>
                         </td>
                     </tr> -->
-                </tbody>
-            </table>
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
-    <script src="/public/src/js/jquery-3.6.0.min.js">
-    </script>
-    <script src="/public/src/js/main.js">
-    </script>
+    <script src="/public/src/js/jquery-3.6.0.min.js"></script>
+    <script src="/public/src/js/main.js"></script>
     <script>
-        $(function () {
-            $("#nav-placeholder").load("/public/src/Components/navbarComponent.html", function () {
-                $("#nav-placeholder").addClass("permission-"+USERLOGDATA().userTypeID).children().find('.list-item').filter(":contains('Sınav Sonuçları')").addClass("active");
-                if(USERLOGDATA().image) $("#navbarProfileImage").attr("src", USERLOGDATA().image)
-            });
-        });
+      $(function () {
+        $("#nav-placeholder").load(
+          "/public/src/Components/navbarComponent.html",
+          function () {
+            $("#nav-placeholder")
+              .addClass("permission-" + USERLOGDATA().userTypeID)
+              .children()
+              .find(".list-item")
+              .filter(":contains('Sınav Sonuçları')")
+              .addClass("active");
+            if (USERLOGDATA().image)
+              $("#navbarProfileImage").attr("src", USERLOGDATA().image);
+          }
+        );
+      });
     </script>
 
-    <script src="quizzes.js">
-    </script>
-
-</body>
-
+    <script src="quizzes.js"></script>
+  </body>
 </html>
