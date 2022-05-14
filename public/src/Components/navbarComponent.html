@@ -1,61 +1,72 @@
 <div class="profile-wrapper">
-    <div class="profile-mask">
-        <img id="navbarProfileImage" src="/public/src/img/logo-isimsiz.png" alt="">
-    </div>
+  <div class="profile-mask">
+    <img
+      id="navbarProfileImage"
+      src="/public/src/img/logo-isimsiz.png"
+      alt=""
+    />
+  </div>
+  <div class="profile-text">
+    <p id="name" class="name"></p>
+    <span class="online"><i class="bi bi-circle-fill"></i> Online</span>
+  </div>
 </div>
 
-<div class=" item-list overflow-auto">
-    <div class="list-item ">
-        <a href="/public/pages/profilePage/profile.html">
-            <i class="bi bi-person-fill"></i>
-            Profil</a>
+<div class="item-list overflow-auto">
+  <div class="list-item">
+    <a href="/public/pages/profilePage/profile.html">
+      <i class="bi bi-person-fill"></i>
+      Profil</a
+    >
+  </div>
+
+  <div class="list-item">
+    <a href="/public/pages/joinQuizPage/joinQuiz.html">
+      <i class="bi bi-pencil-fill"></i>
+      Sınava Gir</a
+    >
+  </div>
+  <div class="list-item">
+    <a href="/public/pages/quizzesPage/quizzes.html">
+      <i class="bi bi-award-fill"></i>
+      Sınav Sonuçları</a
+    >
+  </div>
+  <div class="admin-list">
+    <div class="teacher-list">
+      <div class="list-item">
+        <a href="/public/pages/addUserPage/addUser.html">
+          <i class="bi bi-people-fill"></i>
+          Kullanıcı Ekle</a
+        >
+      </div>
+      <div class="list-item">
+        <a href="/public/pages/usersPage/users.html">
+          <i class="bi bi-people-fill"></i>
+          Kullanıcılar</a
+        >
+      </div>
     </div>
 
     <div class="list-item">
-        <a href="/public/pages/joinQuizPage/joinQuiz.html">
-            <i class="bi bi-pencil-fill"></i>
-            Sınava Gir</a>
-
+      <a href="/public/pages/addQuestionPage/addQuestion.html">
+        <i class="bi bi-pencil-square"></i>
+        Soru Hazırla</a
+      >
     </div>
     <div class="list-item">
-        <a href="/public/pages/quizzesPage/quizzes.html">
-            <i class="bi bi-award-fill"></i>
-            Sınav Sonuçları</a>
-
+      <a href="/public/pages/questionsPage/questions.html">
+        <i class="bi bi-card-list"></i>
+        Sorular</a
+      >
     </div>
-    <div class="admin-list">
-        <div class="teacher-list">
-            <div class="list-item">
-                <a href="/public/pages/addUserPage/addUser.html">
-                    <i class="bi bi-people-fill"></i>
-                    Kullanıcı Ekle</a>
-            </div>
-            <div class="list-item">
-                <a href="/public/pages/usersPage/users.html">
-                    <i class="bi bi-people-fill"></i>
-                    Kullanıcılar</a>
-            </div>
-        </div>
-
-        <div class="list-item">
-            <a href="/public/pages/addQuestionPage/addQuestion.html">
-                <i class="bi bi-pencil-square"></i>
-                Soru Hazırla</a>
-
-        </div>
-        <div class="list-item">
-            <a href="/public/pages/questionsPage/questions.html">
-                <i class="bi bi-card-list"></i>
-                Sorular</a>
-
-        </div>
+  </div>
+  <div class="logOut">
+    <div class="list-item">
+      <a href="#" onclick="localStorage.removeItem('user');location.reload()">
+        <i class="bi bi-box-arrow-left"></i>
+        Çıkış</a
+      >
     </div>
-    <div class="logOut">
-        <div class="list-item">
-            <a href="#" onclick="localStorage.removeItem('user');location.reload()">
-                <i class="bi bi-box-arrow-left"></i>
-                Çıkış</a>
-
-        </div>
-    </div>
+  </div>
 </div>

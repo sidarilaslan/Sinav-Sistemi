@@ -29,16 +29,14 @@ nav {
 
   .profile-wrapper {
     width: 100%;
-    text-align: center;
     padding: 10px;
-
+    display: flex;
+    border-bottom: 1px solid #af53a4;
     .profile-mask {
-      width: 100px;
-      height: 100px;
+      width: 64px;
+      height: 64px;
       overflow: hidden;
       border-radius: 50%;
-      display: block;
-      margin: 0 auto;
 
       img {
         width: 100%;
@@ -49,6 +47,23 @@ nav {
         &:hover {
           transform: scale(1.1);
         }
+      }
+    }
+    .profile-text {
+      width: calc(100% - 64px);
+      display: flex;
+      flex-wrap: wrap;
+      align-content: center;
+      padding-left: 10px;
+      .name {
+        color: #0a0a0a91;
+        font-weight: 800;
+        width: 100%;
+      }
+      .online {
+        color: #00ff00a6;
+        font-size: 12px;
+        font-weight: 600;
       }
     }
   }

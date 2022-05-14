@@ -25,9 +25,8 @@ function loginSubmit() {
 function login(data) {
   $.post("/login", data, function (result) {
     if (result) {
-      alert("Giriş başarılı");
       localStorage.setItem("user", JSON.stringify(result));
-      location.replace("./public/pages/usersPage/users.html");
+      location.replace("./public/pages/profilePage/profile.html");
     } else {
       alert("Mail veya şifre yanlış");
       clean();

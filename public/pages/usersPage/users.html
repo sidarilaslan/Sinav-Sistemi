@@ -205,6 +205,7 @@
               .addClass("active");
             if (USERLOGDATA().image)
               $("#navbarProfileImage").attr("src", USERLOGDATA().image);
+            $("#name").text(USERLOGDATA().name + " " + USERLOGDATA().surname);
           }
         );
       });
