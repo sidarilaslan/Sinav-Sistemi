@@ -45,6 +45,13 @@ router.post("/update", (req, res) => {
       res.end();
     });
 });
+router.post("/updateConfirmQuestion", (req, res) => {
+  questionController.updateConfirmQuestion(req.body).then((result) => {
+    res.send(result);
+    res.end();
+  });
+});
+
 // router.post("/update", (req, res) => {
 //   questionController
 //     .updateQuestion(req.body.question, req.body.answers)

@@ -103,17 +103,17 @@ body {
 
     .submit-button {
       width: 100%;
+      display: flex;
+      justify-content: space-between;
 
       .btn {
         background-image: linear-gradient(90deg, #d0368a 0%, #708ad4 99%);
         border: none;
-        float: right;
         width: 25%;
         max-width: 250px;
         &.btn-danger {
           background-image: none;
           width: auto;
-          float: left;
         }
       }
     }

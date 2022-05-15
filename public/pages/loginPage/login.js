@@ -25,6 +25,7 @@ function loginSubmit() {
 function login(data) {
   $.post("/login", data, function (result) {
     if (result) {
+      result.settings = JSON.parse(result.settings);
       localStorage.setItem("user", JSON.stringify(result));
       location.replace("./public/pages/profilePage/profile.html");
     } else {

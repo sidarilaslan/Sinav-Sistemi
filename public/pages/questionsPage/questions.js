@@ -23,16 +23,46 @@ $(document).ready(function () {
                             <td class="question-unit text-end">
                                 <p>${this.unitName}</p>
                             </td>
+                            <td class="question-confirmed text-center">
+                            <input class="form-check-input questionConfirm" type="checkbox" value="${
+                              this.questionID
+                            }" ${this?.isConfirmed ? "checked" : ""} ${
+          USERLOGDATA().userTypeID == 2 ? "" : "disabled"
+        }>
+                            </td>
                             <td class="actions text-end">
-                                <a href="#" onclick="openViewModal('${this.questionID}', 'view')" class="view" data-toggle="tooltip" title=""
+                                <a href="#" onclick="openViewModal('${
+                                  this.questionID
+                                }', 'view')" class="view" data-toggle="tooltip" title=""
                                     data-original-title="view"><i class="bi bi-eye-fill"></i></a>
-                                <a href="#" onclick="openViewModal('${this.questionID}', 'edit')" class="edit" data-toggle="tooltip" title="" data-original-title="Edit"><i
+                                <a href="#" onclick="openViewModal('${
+                                  this.questionID
+                                }', 'edit')" class="edit" data-toggle="tooltip" title="" data-original-title="Edit"><i
                                         class="bi bi-pencil-fill"></i></a>
-                                <a href="#" onclick="openViewModal('${this.questionID}', 'remove')" class="text-danger" data-toggle="tooltip" title=""
+                                <a href="#" onclick="openViewModal('${
+                                  this.questionID
+                                }', 'remove')" class="text-danger" data-toggle="tooltip" title=""
                                     data-original-title="Delete"><i class="bi bi-trash3-fill"></i></a>
                             </td>
                         </tr>
                   `
+      );
+    });
+    $(".questionConfirm").change(function () {
+      let data = {
+        questionID: this.value,
+        isConfirmed: this.checked,
+      };
+      console.log(data);
+      $.post(
+        "/questions/updateConfirmQuestion",
+        {
+          questionID: this.value,
+          isConfirmed: this.checked,
+        },
+        function (result) {
+          console.log(result);
+        }
       );
     });
   });

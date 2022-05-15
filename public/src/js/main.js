@@ -13,6 +13,7 @@ function redirectUser(notPermission = [], defLocation = "/") {
 }
 function resetUserStorage() {
   $.get("/users/get/userID/" + USERLOGDATA().userID, function (user) {
+    user.settings = JSON.parse(user.settings);
     localStorage.setItem("user", JSON.stringify(user));
     return user;
   });

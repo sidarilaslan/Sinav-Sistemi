@@ -34,6 +34,13 @@ router.post("/updateProfile", (req, res) => {
       res.end();
     });
 });
+router.post("/updateSettings", (req, res) => {
+  console.log(req.body);
+  userController.updateUserSettings(req.body).then((result) => {
+    res.send(result);
+    res.end();
+  });
+});
 router.post("/delete", (req, res) => {
   userController.deleteUser(req.body.userID).then((result) => {
     res.send(result);

@@ -47,7 +47,11 @@ async function insertUser(user, image) {
       : db
     )
       .query(
-        `Insert into tblUsers OUTPUT Inserted.userID values('${user.name}','${user.surName}', '${user.mail}','${user.password}',${user.userTypeID},'${user.tcNO}',` +
+        `Insert into tblUsers OUTPUT Inserted.userID values('${user.name}','${
+          user.surName
+        }', '${user.mail}','${user.password}',${user.userTypeID},'${
+          user.tcNO
+        }','${JSON.stringify(user.settings)}', ` +
           (isThereUploadedImg ? `'${image?.mimetype}',@img)` : "NULL,NULL)")
       )
       .then((result) => {
@@ -85,6 +89,14 @@ async function updateUserProfile(user, image) {
     );
   });
 }
+async function updateUserSettings(user) {
+  console.log(user);
+  return await connectDB().then(async (db) => {
+    db.query(
+      `Update tblUsers set settings='${user.settings}' where userID=${user.userID}`
+    );
+  });
+}
 async function updatePassword(mail, password) {
   let x = await connectDB();
   return (
@@ -108,4 +120,5 @@ module.exports = {
   deleteUser,
   updatePassword,
   updateUserProfile,
+  updateUserSettings,
 };

@@ -69,7 +69,7 @@ async function insertQuestion(question, img) {
       .query(
         `Insert into tblQuestions OUTPUT Inserted.questionID values('${question.question.questionText}', ${question.question.sectionID}, ${question.question.unitID},${question.question.rightAnswerIndex}` +
           (isThereUploadedImg ? `,@img,'${img?.mimetype}'` : ",NULL,NULL ") +
-          ")"
+          ",NULL)"
       )
       .then((result) => {
         question.answers.forEach((answer) => {
@@ -108,11 +108,28 @@ async function updateQuestion(question, img) {
   });
 }
 async function deleteQuestion(questionID) {
-  let x = await connectDB();
-  x.query(`Delete from tblAnswers where questionID = ${questionID}`);
-  return (
-    await x.query(`Delete from tblQuestions where questionID = ${questionID}`)
-  ).recordset;
+  return await connectDB().then((db) => {
+    db.query(`Delete from tblQuestions where questionID = ${questionID}`).then(
+      () => {
+        db.query(`Delete from tblAnswers where questionID = ${questionID}`);
+      }
+    );
+  });
+}
+
+async function updateConfirmQuestion(question) {
+  console.log(question.isConfirmed === "true");
+  return await connectDB().then(async (db) => {
+    return await db
+      .query(
+        `Update tblQuestions set isConfirmed=${
+          question.isConfirmed === "true" ? 1 : 0
+        } where questionID=${question.questionID}`
+      )
+      .then(async (result) => {
+        return result.recordset;
+      });
+  });
 }
 
 module.exports = {
@@ -122,4 +139,5 @@ module.exports = {
   deleteQuestion,
   updateQuestion,
   getQuestionV2,
+  updateConfirmQuestion,
 };

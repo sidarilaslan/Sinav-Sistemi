@@ -6,6 +6,9 @@ $(document).ready(function () {
   $("#userPassword").val(USERLOGDATA().password);
   $("#userTC").val(USERLOGDATA().tcNO);
   $("#userType" + USERLOGDATA().userTypeID).addClass("active");
+  for (let i = 0; i < USERLOGDATA().settings.frequencies.length; i++) {
+    $("#frequency" + i).val(USERLOGDATA().settings.frequencies[i]);
+  }
   if (USERLOGDATA().image != null)
     $("#userImg").css("background-image", "url(" + USERLOGDATA().image + ")");
 });
@@ -31,4 +34,23 @@ function submit() {
       location.reload();
     },
   });
+}
+function submitFrequencySetting() {
+  console.log("oke");
+  let frequencies = [];
+  for (let index = 0; index < 6; index++) {
+    frequencies.push(parseInt($("#frequency" + index).val()));
+  }
+  $.post(
+    "/users/updateSettings",
+    {
+      userID: USERLOGDATA().userID,
+      settings: JSON.stringify({ frequencies: frequencies }),
+    },
+    function (result) {
+      resetUserStorage();
+      console.log(result);
+    }
+  );
+  console.log(frequencies);
 }

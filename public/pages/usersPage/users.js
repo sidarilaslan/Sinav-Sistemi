@@ -1,7 +1,16 @@
 $(document).ready(function () {
   redirectUser([1, 3]);
-
+  let userTypes = ["Öğrenci", "Admin", "Öğretmen"];
   $.get("/users/get", function (users) {
+    users.sort((a, b) => {
+      if (userTypes[a.userTypeID - 1] < userTypes[b.userTypeID - 1]) {
+        return -1;
+      }
+      if (userTypes[a.userTypeID - 1] > userTypes[b.userTypeID - 1]) {
+        return 1;
+      }
+      return 0;
+    });
     $(users).each(function (index) {
       $("#usersList").append(
         `<tr class="candidates-list">
@@ -25,7 +34,7 @@ $(document).ready(function () {
                     </td>
                     <td class="candidate-list-favourite-time text-center">
                         <span class="candidate-list-time order-1">${
-                          this.userTypeID
+                          userTypes[this.userTypeID - 1]
                         }</span>
                     </td>
                     <td>

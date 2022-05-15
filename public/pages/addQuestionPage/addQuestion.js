@@ -30,49 +30,58 @@ $(document).ready(function () {
   });
 });
 function addQuestion() {
-  let question = {
-    questionText: $("#questionText").val(),
-    sectionID: parseInt($("#section").val()),
-    unitID: parseInt($("#unit").val()),
-    rightAnswerIndex: parseInt(
-      $("#answers").children(".active").children("input").attr("id").slice(6)
-    ),
-  };
-  let answers = [];
+  if (parseInt($("#section").val()) != 0) {
+    if (
+      $("#answers").children(".active").children("input").attr("id") !==
+      undefined
+    ) {
+      let question = {
+        questionText: $("#questionText").val(),
+        sectionID: parseInt($("#section").val()),
+        unitID: parseInt($("#unit").val()),
+        rightAnswerIndex: parseInt(
+          $("#answers")
+            .children(".active")
+            .children("input")
+            .attr("id")
+            .slice(6)
+        ),
+      };
+      let answers = [];
 
-  $("#answers")
-    .children()
-    .children("input")
-    .each(function (index, value) {
-      answers.push({
-        answerIndex: index,
-        questionID: 99,
-        answerText: value.value,
+      $("#answers")
+        .children()
+        .children("input")
+        .each(function (index, value) {
+          answers.push({
+            answerIndex: index,
+            questionID: 99,
+            answerText: value.value,
+          });
+        });
+
+      let formData = new FormData();
+      let file_data = $("#file")[0].files[0];
+      formData.append("image", file_data);
+      formData.append(
+        "question",
+        JSON.stringify({
+          question: question,
+          answers: answers,
+        })
+      );
+
+      $.ajax({
+        url: "/questions/insert",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function () {
+          alert("Soru eklendi.");
+          location.reload();
+        },
       });
-    });
-
-  let formData = new FormData();
-  let file_data = $("#file")[0].files[0];
-  console.log(file_data);
-  formData.append("image", file_data);
-  formData.append(
-    "question",
-    JSON.stringify({
-      question: question,
-      answers: answers,
-    })
-  );
-
-  $.ajax({
-    url: "/questions/insert",
-    type: "POST",
-    data: formData,
-    processData: false,
-    contentType: false,
-    success: function (data) {
-      console.log(data);
-      alert("Soru eklendi.");
-      location.reload();
-    },
-  });
+    } else alert("Lütfen doğru olan şıkkı seçiniz.");
+  } else alert("Lütfen konu seçiniz.");
 }
