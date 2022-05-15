@@ -1,6 +1,6 @@
 let mailCode;
 $(document).ready(function () {
-  if (isLoggedIn()) location.replace("./public/pages/usersPage/users.html");
+  if (isLoggedIn()) location.replace("./public/pages/profilePage/profile.html");
 
   $("#btnForgetPassword").click(function () {
     toggleClass("#validationModal", "show", "fade");
