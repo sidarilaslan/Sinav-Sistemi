@@ -36,17 +36,48 @@ async function insertQuiz(quiz) {
       });
   });
 }
-// async function getUserAnalysis(userID) {
-//   (await connectDB())
-//     .query(`SELECT * FROM tblUserAnalysis where userID=${userID}`)
-//     .then((result) => {
-//       console.log(result.recordset);
-//       return result.recordset;
-//     });
-// }
+async function getUserAnalysis(userID) {
+  return (await connectDB())
+    .query(`SELECT * FROM tblUserAnalysis where userID=${userID}`)
+    .then((result) => {
+      console.log(result.recordset);
+      return result.recordset;
+    });
+}
+async function updateUserAnalysis(analysis) {
+  console.log(analysis);
+  return (await connectDB())
+    .query(
+      `IF EXISTS (SELECT * FROM tblUserAnalysis WHERE questionID= ${analysis.questionID} AND userID= ${analysis.userID})
+    BEGIN
+        IF (${analysis.correctCount} = 0)
+	      BEGIN
+          DELETE from tblUserAnalysis WHERE questionID = ${analysis.questionID} AND userID= ${analysis.userID}
+	      END
+	      BEGIN
+        UPDATE tblUserAnalysis
+            SET correctCount = ${analysis.correctCount} , lastAskedDate = '${analysis.lastAskedDate}'
+            WHERE questionID= ${analysis.questionID} AND userID= ${analysis.userID}
+        END
+    END
+    ELSE
+    BEGIN
+    IF (${analysis.correctCount} != 0)
+    BEGIN
+      Insert into tblUserAnalysis values(${analysis.userID}, ${analysis.questionID}, ${analysis.correctCount}, '${analysis.lastAskedDate}')
+      END
+    END`
+    )
+    .then((result) => {
+      console.log(result.recordset);
+      return result.recordset;
+    });
+}
 
 module.exports = {
   insertQuiz,
   getUserQuizzes,
   getQuizQuestions,
+  getUserAnalysis,
+  updateUserAnalysis,
 };

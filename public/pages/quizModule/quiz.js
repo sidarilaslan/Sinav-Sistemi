@@ -1,6 +1,6 @@
-$(document).ready(function () {
+$(document).ready(async function () {
   let QUESTIONCOUNT = 5;
-  let QUESTIONTIME = 2; //seconds
+  let QUESTIONTIME = 60; //seconds
   if (location.pathname.replace("/quiz/", "").includes("view")) {
     let quizID = location.pathname.replace("/quiz/view/", "");
     $.get("/quiz/get/quizzes/" + USERLOGDATA().userID, function (result) {
@@ -51,61 +51,125 @@ $(document).ready(function () {
         </div>`
       );
     });
-    $.get("/quiz/get/quiz/" + quizID, async function (result) {
-      let quizQuestionsID = result.filter((quiz) => quiz.quizID == quizID);
-      let index = 0;
-      for (let quizQuestion of quizQuestionsID) {
-        await $.get(
-          "/questions/getv2/" + quizQuestion.questionID,
-          function (question) {
-            question.userAnswer = quizQuestion.answerIndex;
-            addToHTMLList(question, index, false);
-            index++;
-          }
-        );
-      }
-    });
-  } else if (location.pathname.replace("/quiz/", "").includes("section")) {
-    let quizSectionID = location.pathname.replace("/quiz/section/", "");
-    $.get("/questions/get", (result) => {
-      result = result.filter(
-        (question) => question.sectionID[0] == quizSectionID
+    $.get("/quiz/get/quizQuestions/" + quizID, async function (result) {
+      result = result.filter((quiz) => quiz.quizID == quizID);
+      let questions = await getQuestionsWithIDs(
+        result.map((question) => question.questionID)
       );
-      let questions = selectRandomItems(
-        result,
-        result.length < QUESTIONCOUNT ? result.length : QUESTIONCOUNT
-      );
-      console.log(result);
-      console.log(questions);
-
-      questions.forEach((question, index) => addToHTMLList(question, index));
-      $("#timer")
-        .data("seconds-left", QUESTIONTIME * questions.length)
-        .startTimer({
-          onComplete: function () {
-            submit();
-            alert("Süreniz doldu. Cevaplarınız gönderiliyor.");
-          },
-        });
-      // end of the question foreach
-      sessionStorage.setItem("questions", JSON.stringify(questions));
-      sessionStorage.setItem("quiz", JSON.stringify({ quizTypeID: 1 }));
-
-      $(".btn-group-vertical").on("click", ".btn", function () {
-        $(this).addClass("active").siblings().removeClass("active");
+      questions.forEach((question, index) => {
+        question.userAnswer = result[index].answerIndex;
+        addToHTMLList(question, index, question.answers);
       });
+    });
+  } else {
+    let questions = [];
+    if (location.pathname.replace("/quiz/", "").includes("section")) {
+      let quizSectionID = location.pathname.replace("/quiz/section/", "");
+      await $.get("/questions/get", (dbQuestions) => {
+        questions = selectRandomItems(
+          dbQuestions.filter(
+            (question) => question.sectionID[0] == quizSectionID
+          ),
+          QUESTIONCOUNT
+        );
+      });
+    } else if (location.pathname.replace("/quiz/", "").includes("quiz")) {
+      let questionRanges = [3, 7, 21, 60, 120, 360];
+
+      await $.get("/quiz/get/userAnalysis/" + USERLOGDATA().userID).then(
+        async (dbRequiredQuestionIDs) => {
+          questions = dbRequiredQuestionIDs
+            .filter((question) => {
+              question.dateToAsk = new Date(
+                question.lastAskedDate.split(".")[0]
+              );
+              question.dateToAsk.setDate(
+                question.dateToAsk.getDate() +
+                  questionRanges[question.correctCount - 1]
+              );
+              return question.dateToAsk <= new Date();
+            })
+            .sort(function (a, b) {
+              return (
+                new Date(a.lastAskedDate).setDate(
+                  new Date(a.lastAskedDate).getDate() +
+                    questionRanges[a.correctCount - 1]
+                ) -
+                new Date(b.lastAskedDate).setDate(
+                  new Date(b.lastAskedDate).getDate() +
+                    questionRanges[b.correctCount - 1]
+                )
+              );
+            })
+            .slice(0, QUESTIONCOUNT);
+          sessionStorage.setItem("userAnalysis", JSON.stringify(questions));
+          questions = questions.map((question) => question.questionID);
+          questions = await getQuestionsWithIDs(questions);
+          if (QUESTIONCOUNT - questions.length > 0) {
+            await $.get("/questions/get", (dbQuestions) => {
+              dbQuestions = selectRandomItems(
+                dbQuestions.filter(
+                  (dbQuestion) =>
+                    !dbRequiredQuestionIDs
+                      .map((question) => question.questionID)
+                      .includes(dbQuestion.questionID)
+                ),
+                QUESTIONCOUNT - questions.length
+              );
+              questions = [...questions, ...dbQuestions];
+            });
+          }
+          return questions;
+        }
+      );
+    }
+    console.log(questions);
+    QUESTIONCOUNT = questions.length;
+    questions.forEach((question, index) =>
+      addToHTMLList(
+        question,
+        index,
+        selectRandomItems(question.answers, question.answers.length)
+      )
+    );
+    $("#timer")
+      .data("seconds-left", QUESTIONTIME * questions.length)
+      .startTimer({
+        onComplete: function () {
+          submit();
+          alert("Süreniz doldu. Cevaplarınız gönderiliyor.");
+        },
+      });
+    sessionStorage.setItem("questions", JSON.stringify(questions));
+    sessionStorage.setItem(
+      "quiz",
+      JSON.stringify({
+        quizTypeID: location.pathname.replace("/quiz/", "").includes("section")
+          ? 1
+          : 2,
+      })
+    );
+
+    $(".btn-group-vertical").on("click", ".btn", function () {
+      $(this).addClass("active").siblings().removeClass("active");
     });
   }
 });
-function addToHTMLList(question, index, isAnswerRandom = true) {
-  if (index == 1) console.log(question.questionText);
+async function getQuestionsWithIDs(idList) {
+  let questions = [];
+  for (let id of idList)
+    questions.push(
+      await $.get("/questions/getv2/" + id, function (question) {
+        return question;
+      })
+    );
+  return questions;
+}
+function addToHTMLList(question, index, answers) {
   let stylishHTMLElement = "";
-  let answers = isAnswerRandom
-    ? selectRandomItems(question.answers, question.answers.length)
-    : question.answers;
   answers.forEach((answer, i) => {
     stylishHTMLElement += `<button ${
-      question?.userAnswer != undefined ? "disabled" : ""
+      question?.userAnswer !== undefined ? "disabled" : ""
     } type="button" class="btn ${
       question?.userAnswer !== undefined
         ? (question.rightAnswerIndex == answer.answerIndex
@@ -138,7 +202,6 @@ function addToHTMLList(question, index, isAnswerRandom = true) {
                 "'> </div>"
               : ""
           }
-          
           <div class="question-text-area">
             <div class="question-text">${question.questionText}</div>
           </div>
@@ -146,66 +209,89 @@ function addToHTMLList(question, index, isAnswerRandom = true) {
         <div class="question-stylish ${
           question?.userAnswer == null ? "null" : ""
         } btn-group-vertical">
-          
             ${stylishHTMLElement}
-         
         </div>
       </div>`);
 }
-function selectRandomItems(array, count) {
-  let randomArray = [];
-  let alreadyIndexes = [];
-  let randomIndex;
-  for (let i = 0; i < count; i++) {
-    randomIndex = Math.floor(Math.random() * array.length);
-    while (alreadyIndexes.includes(randomIndex))
-      randomIndex = Math.floor(Math.random() * array.length);
-    alreadyIndexes.push(randomIndex);
-    randomArray.push(array[randomIndex]);
-  }
-  return randomArray;
+
+function selectRandomItems(arr, num) {
+  const shuffled = [...arr].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, num);
 }
 function submit() {
   $("#timer").remove();
+  $("#submitButton").attr("disabled", true);
   let questions = JSON.parse(sessionStorage.getItem("questions"));
-  let answers = [];
+  let userAnswers = [];
   let correctCounter = 0,
     uncorrectCounter = 0,
     nullCounter = 0;
+  let activeButton;
+  let date = new Date();
+
+  let dateText = `${date.getFullYear()}-${
+    date.getMonth() + 1
+  }-${date.getDate()} ${date.getHours()}:${
+    date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()
+  }`;
+  let userAnalysis = JSON.parse(sessionStorage.getItem("userAnalysis"));
+  console.log(userAnalysis);
+  let userAnalysisIndex;
   $("#quizContainer")
     .children()
     .children(".question-stylish")
     .each((index, question) => {
-      let activeButton = Array.from(question.children).filter((chapter) =>
+      activeButton = Array.from(question.children).filter((chapter) =>
         chapter.classList.contains("active")
       )[0];
-      if (activeButton == undefined) nullCounter++;
-      else if (activeButton.value == questions[index].rightAnswerIndex)
-        correctCounter++;
-      else uncorrectCounter++;
+      // console.log(questions[index].questionID);
 
-      answers.push({
+      userAnalysisIndex = userAnalysis.findIndex((analysis) => {
+        return analysis.questionID === questions[index].questionID;
+      });
+      if (userAnalysisIndex == -1) {
+        userAnalysis.push({
+          userID: JSON.parse(localStorage.getItem("user")).userID,
+          questionID: questions[index].questionID,
+          correctCount: 0,
+        });
+        userAnalysisIndex = userAnalysis.length - 1;
+      }
+      userAnalysis[userAnalysisIndex].lastAskedDate = dateText;
+      if (activeButton == undefined) {
+        nullCounter++;
+        userAnalysis[userAnalysisIndex].correctCount = 0;
+      } else if (activeButton.value == questions[index].rightAnswerIndex) {
+        correctCounter++;
+        userAnalysis[userAnalysisIndex].correctCount++;
+      } else {
+        uncorrectCounter++;
+        userAnalysis[userAnalysisIndex].correctCount = 0;
+      }
+      userAnswers.push({
         questionID: questions[index].questionID,
         answerIndex:
           activeButton != undefined ? parseInt(activeButton.value) : null,
       });
     });
-  let date = new Date();
-  console.log(date);
   let quiz = {
     quizTypeID: JSON.parse(sessionStorage.getItem("quiz")).quizTypeID,
     userID: JSON.parse(localStorage.getItem("user")).userID,
     correctCount: correctCounter,
     uncorrectCount: uncorrectCounter,
     nullCount: nullCounter,
-    date: `${date.getFullYear()}-${
-      date.getMonth() + 1
-    }-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`,
-    answers: JSON.stringify(answers),
+    date: dateText,
+    answers: JSON.stringify(userAnswers),
   };
+  console.log(userAnalysis);
   sessionStorage.removeItem("quiz");
   sessionStorage.removeItem("questions");
   $.post("/quiz/insert", quiz, function (result) {
+    console.log(result.quizID);
+    userAnalysis.forEach((analysis) => {
+      $.post("/quiz/updateUserAnalysis", analysis, function (result) {});
+    });
+
     location.replace("/quiz/view/" + result.quizID); //Sınavdan sonra sonuçların hemen gözükmesi için
   });
 }
