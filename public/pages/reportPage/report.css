@@ -1,0 +1,150 @@
+.body {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.body .user-report {
+  -webkit-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding: 15px 30px;
+  width: 90%;
+  height: 90%;
+  position: relative;
+  overflow: auto;
+}
+
+.body .user-report .report-item {
+  margin: 10px 0;
+  width: 100%;
+  background-color: white;
+}
+
+.body .user-report .report-item .border {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 40px;
+  margin: 0;
+}
+
+.body .user-report .report-item .border .report-table .table-head {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.body .user-report .report-item .border .report-table .table-head div {
+  text-align: center;
+  width: 100%;
+}
+
+.body .user-report .report-item .border .report-table .table-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-top: 10px;
+}
+
+.body .user-report .report-item .border .report-table .table-item > div {
+  text-align: center;
+  width: 100%;
+}
+
+.body .progress {
+  width: 150px;
+  height: 150px;
+  background: none;
+  position: relative;
+}
+
+.body .progress::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 6px solid #eee;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.body .progress > span {
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+}
+
+.body .progress .progress-left {
+  left: 0;
+}
+
+.body .progress .progress-bar {
+  width: 100%;
+  height: 100%;
+  background: none;
+  border-width: 6px;
+  border-style: solid;
+  position: absolute;
+  top: 0;
+}
+
+.body .progress .progress-left .progress-bar {
+  border-color: #8281d8 !important;
+  left: 100%;
+  border-top-right-radius: 80px;
+  border-bottom-right-radius: 80px;
+  border-left: 0;
+  -webkit-transform-origin: center left;
+  transform-origin: center left;
+}
+
+.body .progress .progress-right {
+  right: 0;
+}
+
+.body .progress .progress-right .progress-bar {
+  border-color: #8281d8 !important;
+  left: -100%;
+  border-top-left-radius: 80px;
+  border-bottom-left-radius: 80px;
+  border-right: 0;
+  -webkit-transform-origin: center right;
+  transform-origin: center right;
+}
+
+.body .progress .progress-value {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.mb-0,
+.my-0 {
+  margin-bottom: 0 !important;
+}
+/*# sourceMappingURL=report.css.map */

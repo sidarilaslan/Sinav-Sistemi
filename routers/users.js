@@ -35,7 +35,6 @@ router.post("/updateProfile", (req, res) => {
     });
 });
 router.post("/updateSettings", (req, res) => {
-  console.log(req.body);
   userController.updateUserSettings(req.body).then((result) => {
     res.send(result);
     res.end();

@@ -17,6 +17,7 @@
 }
 
 .body .questions-list .container-fluid {
+  background-color: white;
   max-height: 50%;
   width: 80%;
   overflow-y: auto;
@@ -25,11 +26,11 @@
 }
 
 .body .questions-list .container-fluid .table .questions-body .question-item .actions .view {
-  color: #d0368a;
+  color: #8281d8;
 }
 
 .body .questions-list .container-fluid .table .questions-body .question-item .actions .edit {
-  color: #708ad4;
+  color: #80c6f6;
 }
 
 .body .question-edit-modal {

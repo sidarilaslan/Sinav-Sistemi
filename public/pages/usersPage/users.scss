@@ -1,3 +1,15 @@
+$base-color1: #8281d8;
+$base-color2: #80c6f6;
+$base-background-image-color-vertical: linear-gradient(
+  180deg,
+  $base-color1 0%,
+  $base-color2 99%
+);
+$base-background-image-color-horizontal: linear-gradient(
+  90deg,
+  $base-color1 0%,
+  $base-color2 99%
+);
 .body {
   position: relative;
 
@@ -10,6 +22,7 @@
     padding: 0;
     .user-dashboard-info-box {
       box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
+      background-color: white;
       padding: 1.5rem;
       max-height: 80%;
       width: 80%;
@@ -31,10 +44,10 @@
           vertical-align: middle;
           .list-unstyled {
             .text-primary {
-              color: #d0368a !important;
+              color: $base-color1 !important;
             }
             .text-info {
-              color: #708ad4 !important;
+              color: $base-color2 !important;
             }
           }
           li {

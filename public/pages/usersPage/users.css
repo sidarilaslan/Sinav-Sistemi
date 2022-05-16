@@ -20,6 +20,7 @@
 .body .users .user-dashboard-info-box {
   -webkit-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
           box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
+  background-color: white;
   padding: 1.5rem;
   max-height: 80%;
   width: 80%;
@@ -44,11 +45,11 @@
 }
 
 .body .users .user-dashboard-info-box .candidates-list td .list-unstyled .text-primary {
-  color: #d0368a !important;
+  color: #8281d8 !important;
 }
 
 .body .users .user-dashboard-info-box .candidates-list td .list-unstyled .text-info {
-  color: #708ad4 !important;
+  color: #80c6f6 !important;
 }
 
 .body .users .user-dashboard-info-box .candidates-list td li {

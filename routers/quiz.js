@@ -33,14 +33,12 @@ router.post("/updateUserAnalysis", (req, res) => {
   });
 });
 router.get("/get/quizzes/:userID", (req, res) => {
-  console.log(req.params.userID);
   quizController.getUserQuizzes(req.params.userID).then((result) => {
     res.send(result);
     res.end();
   });
 });
 router.get("/get/quizQuestions/:quizID", (req, res) => {
-  console.log(req.params.quizID);
   quizController.getQuizQuestions(req.params.quizID).then((result) => {
     res.send(result);
     res.end();

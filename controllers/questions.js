@@ -118,7 +118,6 @@ async function deleteQuestion(questionID) {
 }
 
 async function updateConfirmQuestion(question) {
-  console.log(question.isConfirmed === "true");
   return await connectDB().then(async (db) => {
     return await db
       .query(

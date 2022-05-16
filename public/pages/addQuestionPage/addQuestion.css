@@ -16,6 +16,7 @@ body {
 }
 
 .question-body .add-question-card {
+  background-color: white;
   width: 80%;
   -webkit-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
           box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
@@ -147,8 +148,8 @@ body {
 }
 
 .question-body .add-question-card .submit-button .btn {
-  background-image: -webkit-gradient(linear, left top, right top, from(#d0368a), color-stop(99%, #708ad4));
-  background-image: linear-gradient(90deg, #d0368a 0%, #708ad4 99%);
+  background-image: -webkit-gradient(linear, left top, right top, from(#8281d8), color-stop(99%, #80c6f6));
+  background-image: linear-gradient(90deg, #8281d8 0%, #80c6f6 99%);
   border: none;
   width: 25%;
   max-width: 250px;

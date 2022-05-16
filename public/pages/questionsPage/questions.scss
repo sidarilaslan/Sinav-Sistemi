@@ -1,3 +1,15 @@
+$base-color1: #8281d8;
+$base-color2: #80c6f6;
+$base-background-image-color-vertical: linear-gradient(
+  180deg,
+  $base-color1 0%,
+  $base-color2 99%
+);
+$base-background-image-color-horizontal: linear-gradient(
+  90deg,
+  $base-color1 0%,
+  $base-color2 99%
+);
 .body {
   position: relative;
 
@@ -9,6 +21,7 @@
     padding: 0;
 
     .container-fluid {
+      background-color: white;
       max-height: 50%;
       width: 80%;
       overflow-y: auto;
@@ -19,10 +32,10 @@
           .question-item {
             .actions {
               .view {
-                color: #d0368a;
+                color: $base-color1;
               }
               .edit {
-                color: #708ad4;
+                color: $base-color2;
               }
             }
           }

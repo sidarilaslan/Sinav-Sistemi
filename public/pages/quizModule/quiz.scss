@@ -1,5 +1,17 @@
+$base-color1: #8281d8;
+$base-color2: #80c6f6;
+$base-background-image-color-vertical: linear-gradient(
+  180deg,
+  $base-color1 0%,
+  $base-color2 99%
+);
+$base-background-image-color-horizontal: linear-gradient(
+  90deg,
+  $base-color1 0%,
+  $base-color2 99%
+);
 body {
-  background-image: linear-gradient(180deg, #d0368a 0%, #708ad4 99%);
+  background-image: $base-background-image-color-vertical;
   padding: 0px 10%;
 }
 .main-container {

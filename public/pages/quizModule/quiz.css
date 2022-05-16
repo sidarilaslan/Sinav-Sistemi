@@ -1,6 +1,6 @@
 body {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#d0368a), color-stop(99%, #708ad4));
-  background-image: linear-gradient(180deg, #d0368a 0%, #708ad4 99%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#8281d8), color-stop(99%, #80c6f6));
+  background-image: linear-gradient(180deg, #8281d8 0%, #80c6f6 99%);
   padding: 0px 10%;
 }
 

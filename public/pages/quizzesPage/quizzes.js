@@ -1,10 +1,8 @@
 $(document).ready(function () {
   redirectUser();
   $.get("/quiz/get/quizzes/" + USERLOGDATA().userID, function (result) {
-    console.log(result);
     let date;
     result.forEach((quiz) => {
-      console.log(quiz.date.split("-")[2].split("T")[1].split(":")[0]);
       date = {
         year: quiz.date.split("-")[0],
         month: quiz.date.split("-")[1],
@@ -12,7 +10,6 @@ $(document).ready(function () {
         hour: quiz.date.split("-")[2].split("T")[1].split(":")[0],
         minute: quiz.date.split("-")[2].split("T")[1].split(":")[1],
       };
-      console.log(date);
 
       $("#quizList").append(
         `<tr>
@@ -46,6 +43,5 @@ $(document).ready(function () {
   });
 });
 function getQuiz(quizID) {
-  console.log(quizID);
   window.open("/quiz/view/" + quizID);
 }

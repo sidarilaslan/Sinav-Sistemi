@@ -1,6 +1,5 @@
 .body {
   position: relative;
-  background-color: white;
   overflow-y: auto;
 }
 
@@ -20,6 +19,7 @@
 }
 
 .body .quizzes-list .container-fluid {
+  background-color: white;
   width: 80%;
   max-height: 50%;
   overflow-y: auto;
@@ -28,7 +28,7 @@
 }
 
 .body .quizzes-list .container-fluid .table .actions .text-primary {
-  color: #d0368a !important;
+  color: #8281d8 !important;
 }
 
 .body .question-edit-modal {
