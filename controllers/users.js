@@ -90,7 +90,6 @@ async function updateUserProfile(user, image) {
   });
 }
 async function updateUserSettings(user) {
-  console.log(user);
   return await connectDB().then(async (db) => {
     db.query(
       `Update tblUsers set settings='${user.settings}' where userID=${user.userID}`

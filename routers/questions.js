@@ -51,22 +51,4 @@ router.post("/updateConfirmQuestion", (req, res) => {
     res.end();
   });
 });
-
-// router.post("/update", (req, res) => {
-//   questionController
-//     .updateQuestion(req.body.question, req.body.answers)
-//     .then((result) => {
-//       res.send(result);
-//       res.end();
-//     });
-// });
-// router.post("/uploadImage", (req, res) => {
-//   console.log(JSON.parse(req.body.question));
-//   // questionController.uploadImgQuestion(req.files.file).then(async (result) => {
-//   //   console.log(result);
-//   //   res.send(`data:image/png;base64,${result.toString("base64")}`);
-//   //   res.end();
-//   // });
-// });
-
 module.exports = router;

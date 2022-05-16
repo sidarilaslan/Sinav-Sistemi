@@ -36,7 +36,6 @@ function submit() {
   });
 }
 function submitFrequencySetting() {
-  console.log("oke");
   let frequencies = [];
   for (let index = 0; index < 6; index++) {
     frequencies.push(parseInt($("#frequency" + index).val()));
@@ -49,8 +48,6 @@ function submitFrequencySetting() {
     },
     function (result) {
       resetUserStorage();
-      console.log(result);
     }
   );
-  console.log(frequencies);
 }

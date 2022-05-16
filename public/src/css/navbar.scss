@@ -1,3 +1,16 @@
+$base-color1: #8281d8;
+$base-color2: #80c6f6;
+$base-background-image-color-vertical: linear-gradient(
+  180deg,
+  $base-color1 0%,
+  $base-color2 99%
+);
+$base-background-image-color-horizontal: linear-gradient(
+  90deg,
+  $base-color1 0%,
+  $base-color2 99%
+);
+
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -11,7 +24,8 @@
 ::-webkit-scrollbar-thumb {
   border: 1px solid transparent;
   background-clip: content-box;
-  background-image: linear-gradient(180deg, #d0368a 0%, #708ad4 99%);
+  background-image: $base-background-image-color-vertical;
+
   box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
   border-radius: 100px;
 }
@@ -36,7 +50,7 @@ nav {
     box-sizing: border-box;
   }
 
-  background-image: linear-gradient(180deg, #d0368a 0%, #708ad4 99%);
+  background-image: linear-gradient(180deg, #8281d8 0%, #80c6f6 99%);
 
   position: fixed;
   height: 100%;
@@ -45,7 +59,7 @@ nav {
     width: 100%;
     padding: 10px;
     display: flex;
-    border-bottom: 1px solid #af53a4;
+    border-bottom: 1px solid $base-color1;
     .profile-mask {
       width: 64px;
       height: 64px;

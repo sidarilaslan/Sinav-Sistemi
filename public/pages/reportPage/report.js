@@ -2,7 +2,6 @@ $(document).ready(function () {
   redirectUser();
   $.get("/quiz/get/quizzes/" + USERLOGDATA().userID, async function (quizzes) {
     let quizIDs = quizzes.map((quiz) => quiz.quizID);
-    console.log(quizIDs);
     let questions = [];
     for (let quizID of quizIDs) {
       questions = [
@@ -27,7 +26,6 @@ $(document).ready(function () {
     });
     noDuplicateQuestions = [...new Map(noDuplicateQuestions).values()];
     noDuplicateQuestions = await getQuestionsWithIDs(noDuplicateQuestions);
-    console.log(noDuplicateQuestions);
     noDuplicateQuestions = noDuplicateQuestions.map((question) => {
       return {
         sectionName: question.sectionName,
@@ -38,7 +36,6 @@ $(document).ready(function () {
             : null,
       };
     });
-    console.log(noDuplicateQuestions);
 
     let questionsWithCategories = noDuplicateQuestions.reduce((r, a) => {
       r[a.sectionName] = [
@@ -47,12 +44,9 @@ $(document).ready(function () {
       ];
       return r;
     }, {});
-    console.log(questionsWithCategories);
 
     for (const [key, values] of Object.entries(questionsWithCategories)) {
       questionsWithCategories[key] = values.reduce((r, a) => {
-        console.log(a);
-        console.log(r);
         r = {
           units: r.units || {},
         };
@@ -60,7 +54,6 @@ $(document).ready(function () {
         return r;
       }, {});
     }
-    console.log(questionsWithCategories);
     let result = [];
     for (const [section, values] of Object.entries(questionsWithCategories)) {
       result[section] = {
@@ -93,7 +86,6 @@ $(document).ready(function () {
         }
       }
     }
-    console.log(result);
     appendReportHTML(result);
     getProgress();
   });
@@ -112,16 +104,15 @@ $(document).ready(function () {
     return questions;
   }
   function getPercent(obj) {
-    return (
+    return Math.floor(
       (obj.correctCount * 100) /
-      (obj.correctCount + obj.uncorrectCount + obj.nullCount)
+        (obj.correctCount + obj.uncorrectCount + obj.nullCount)
     );
   }
   function appendReportHTML(report) {
     let unitsHTMLS = "";
     for (let [section] of Object.entries(report)) {
       unitsHTMLS = "";
-      console.log(report[section]);
       for (let [unit] of Object.entries(report[section].units)) {
         unitsHTMLS += `
         <div class="col-12 table-item border-right">

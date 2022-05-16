@@ -53,16 +53,13 @@ $(document).ready(function () {
         questionID: this.value,
         isConfirmed: this.checked,
       };
-      console.log(data);
       $.post(
         "/questions/updateConfirmQuestion",
         {
           questionID: this.value,
           isConfirmed: this.checked,
         },
-        function (result) {
-          console.log(result);
-        }
+        function (result) {}
       );
     });
   });
@@ -164,7 +161,6 @@ function submitQuestion(questionID, modalType) {
       });
     let formData = new FormData();
     let file_data = $("#file")[0].files[0];
-    console.log(file_data);
     formData.append("image", file_data);
     formData.append(
       "question",

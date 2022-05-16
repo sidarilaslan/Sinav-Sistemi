@@ -1,5 +1,5 @@
 $(document).ready(async function () {
-  let QUESTIONCOUNT = 5;
+  let QUESTIONCOUNT = 10;
   let QUESTIONTIME = 60; //seconds
   if (location.pathname.replace("/quiz/", "").includes("view")) {
     let quizID = location.pathname.replace("/quiz/view/", "");

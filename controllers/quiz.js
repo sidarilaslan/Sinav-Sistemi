@@ -13,7 +13,6 @@ async function getQuizQuestions(quizID) {
     return db
       .query(`SELECT * FROM tblQuizQuestions where quizID =${quizID}`)
       .then((result) => {
-        console.log(result.recordset);
         return result.recordset;
       });
   });
@@ -40,12 +39,10 @@ async function getUserAnalysis(userID) {
   return (await connectDB())
     .query(`SELECT * FROM tblUserAnalysis where userID=${userID}`)
     .then((result) => {
-      console.log(result.recordset);
       return result.recordset;
     });
 }
 async function updateUserAnalysis(analysis) {
-  console.log(analysis);
   return (await connectDB())
     .query(
       `IF EXISTS (SELECT * FROM tblUserAnalysis WHERE questionID= ${analysis.questionID} AND userID= ${analysis.userID})
@@ -69,7 +66,6 @@ async function updateUserAnalysis(analysis) {
     END`
     )
     .then((result) => {
-      console.log(result.recordset);
       return result.recordset;
     });
 }

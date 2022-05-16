@@ -114,6 +114,7 @@
 }
 
 .body .progress .progress-left .progress-bar {
+  border-color: #8281d8 !important;
   left: 100%;
   border-top-right-radius: 80px;
   border-bottom-right-radius: 80px;
@@ -127,6 +128,7 @@
 }
 
 .body .progress .progress-right .progress-bar {
+  border-color: #8281d8 !important;
   left: -100%;
   border-top-left-radius: 80px;
   border-bottom-left-radius: 80px;

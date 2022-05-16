@@ -1,3 +1,15 @@
+$base-color1: #8281d8;
+$base-color2: #80c6f6;
+$base-background-image-color-vertical: linear-gradient(
+  180deg,
+  $base-color1 0%,
+  $base-color2 99%
+);
+$base-background-image-color-horizontal: linear-gradient(
+  90deg,
+  $base-color1 0%,
+  $base-color2 99%
+);
 .body {
   position: relative;
   display: flex;
@@ -88,6 +100,7 @@
   }
 
   .progress .progress-left .progress-bar {
+    border-color: $base-color1 !important;
     left: 100%;
     border-top-right-radius: 80px;
     border-bottom-right-radius: 80px;
@@ -101,6 +114,7 @@
   }
 
   .progress .progress-right .progress-bar {
+    border-color: $base-color1 !important;
     left: -100%;
     border-top-left-radius: 80px;
     border-bottom-left-radius: 80px;
