@@ -1,4 +1,3 @@
-const { request } = require('express');
 const sql = require('mssql/msnodesqlv8');
 const pool = new sql.ConnectionPool({
     database: "dbSinav",
