@@ -16,42 +16,36 @@ $(document).ready(function () {
         `<tr class="candidates-list">
                     <td class="title">
                         <div class="thumb">
-                            <img class="img-fluid" src="${
-                              this.image != null
-                                ? this.image
-                                : "/public/src/img/No_image_available.svg.png"
-                            }" alt="">
+                            <img class="img-fluid" src="${this.image != null
+          ? this.image
+          : "/public/src/img/No_image_available.svg.png"
+        }" alt="">
                         </div>
                         <div class="candidate-list-details">
                             <div class="candidate-list-info">
                                 <div class="candidate-list-title">
-                                    <h5 class="mb-0"><a href="#">${
-                                      this.name + " " + this.surname
-                                    }</a></h5>
+                                    <h5 class="mb-0"><a href="#">${this.name + " " + this.surname
+        }</a></h5>
                                 </div>
                             </div>
                         </div>
                     </td>
                     <td class="candidate-list-favourite-time text-center">
-                        <span class="candidate-list-time order-1">${
-                          userTypes[this.userTypeID - 1]
-                        }</span>
+                        <span class="candidate-list-time order-1">${userTypes[this.userTypeID - 1]
+        }</span>
                     </td>
                     <td>
                         <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                            <li><a href="#" onclick="openViewModal('${
-                              this.userID
-                            }','view')" class="text-primary" data-toggle="tooltip" title=""
+                            <li><a href="#" onclick="openViewModal('${this.userID
+        }','view')" class="text-primary" data-toggle="tooltip" title=""
                                     data-original-title="view"><i class="bi bi-eye-fill"></i></a>
                             </li>
-                            <li><a href="#" onclick="openViewModal('${
-                              this.userID
-                            }', 'edit')" class="text-info" data-toggle="tooltip" title=""
+                            <li><a href="#" onclick="openViewModal('${this.userID
+        }', 'edit')" class="text-info" data-toggle="tooltip" title=""
                                     data-original-title="Edit"><i class="bi bi-pencil-fill"></i></a>
                             </li>
-                            <li><a href="#" onclick="openViewModal('${
-                              this.userID
-                            }', 'remove')" class="text-danger" data-toggle="tooltip" title=""
+                            <li><a href="#" onclick="openViewModal('${this.userID
+        }', 'remove')" class="text-danger" data-toggle="tooltip" title=""
                                     data-original-title="Delete"><i class="bi bi-trash3-fill"></i></a>
                             </li>
                         </ul>
@@ -68,10 +62,10 @@ function openViewModal(userID, modalType) {
     $("#btnSubmitViewModal").attr(
       "onClick",
       'submitViewModal("' +
-        (modalType == "edit" ? "edit" : "view") +
-        '",' +
-        userID +
-        ")"
+      (modalType == "edit" ? "edit" : "view") +
+      '",' +
+      userID +
+      ")"
     );
     $("#btnDeleteValidationModal").attr(
       "onClick",
@@ -129,6 +123,8 @@ function editUser(user) {
     processData: false,
     contentType: false,
     success: function (data) {
+      resetUserStorage();
+      alert("Kullanıcı düzenlendi.");
       location.reload();
     },
   });

@@ -6,10 +6,10 @@ $(document).ready(function () {
       sections.forEach((section) => {
         $("#section").append(
           '<option value="' +
-            section.sectionID +
-            '">' +
-            section.sectionName +
-            "</option>"
+          section.sectionID +
+          '">' +
+          section.sectionName +
+          "</option>"
         );
       });
       $("#section").on("change", function (event) {
@@ -19,10 +19,10 @@ $(document).ready(function () {
           .forEach((unit) => {
             $("#unit").append(
               '<option value="' +
-                unit.unitID +
-                '">' +
-                unit.unitName +
-                "</option>"
+              unit.unitID +
+              '">' +
+              unit.unitName +
+              "</option>"
             );
           });
       });

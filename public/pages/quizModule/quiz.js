@@ -30,21 +30,19 @@ $(document).ready(async function () {
             <tbody class="body">
               <tr>
                 <td class="text-center correct">${quizInfo.correctCount}</td>
-                <td class="text-center uncorrect">${
-                  quizInfo.uncorrectCount
-                }</td>
+                <td class="text-center uncorrect">${quizInfo.uncorrectCount
+        }</td>
                 <td class="text-center null">${quizInfo.nullCount}</td>
-                <td class="text-center date">${
-                  date.year +
-                  "-" +
-                  date.month +
-                  "-" +
-                  date.day +
-                  " " +
-                  date.hour +
-                  ":" +
-                  date.minute
-                }</td>
+                <td class="text-center date">${date.year +
+        "-" +
+        date.month +
+        "-" +
+        date.day +
+        " " +
+        date.hour +
+        ":" +
+        date.minute
+        }</td>
               </tr>
             </tbody>
           </table>
@@ -85,7 +83,7 @@ $(document).ready(async function () {
               );
               question.dateToAsk.setDate(
                 question.dateToAsk.getDate() +
-                  USERLOGDATA().settings.frequencies[question.correctCount - 1]
+                USERLOGDATA().settings.frequencies[question.correctCount - 1]
               );
               return question.dateToAsk <= new Date();
             })
@@ -93,11 +91,11 @@ $(document).ready(async function () {
               return (
                 new Date(a.lastAskedDate).setDate(
                   new Date(a.lastAskedDate).getDate() +
-                    USERLOGDATA().settings.frequencies[a.correctCount - 1]
+                  USERLOGDATA().settings.frequencies[a.correctCount - 1]
                 ) -
                 new Date(b.lastAskedDate).setDate(
                   new Date(b.lastAskedDate).getDate() +
-                    USERLOGDATA().settings.frequencies[b.correctCount - 1]
+                  USERLOGDATA().settings.frequencies[b.correctCount - 1]
                 )
               );
             })
@@ -175,47 +173,41 @@ async function getQuestionsWithIDs(idList) {
 function addToHTMLList(question, index, answers) {
   let stylishHTMLElement = "";
   answers.forEach((answer, i) => {
-    stylishHTMLElement += `<button ${
-      question?.userAnswer !== undefined ? "disabled" : ""
-    } type="button" class="btn ${
-      question?.userAnswer !== undefined
+    stylishHTMLElement += `<button ${question?.userAnswer !== undefined ? "disabled" : ""
+      } type="button" class="btn ${question?.userAnswer !== undefined
         ? (question.rightAnswerIndex == answer.answerIndex
-            ? "rightAnswer "
-            : "") +
-          (question?.userAnswer == answer.answerIndex
-            ? "active " +
-              (question?.userAnswer != question.rightAnswerIndex
-                ? "false "
-                : "")
+          ? "rightAnswer "
+          : "") +
+        (question?.userAnswer == answer.answerIndex
+          ? "active " +
+          (question?.userAnswer != question.rightAnswerIndex
+            ? "false "
             : "")
+          : "")
         : ""
-    } " value="${answer.answerIndex}">${String.fromCharCode(65 + i)}) ${
-      answer.answerText
-    }</button>`;
+      } " value="${answer.answerIndex}">${String.fromCharCode(65 + i)}) ${answer.answerText
+      }</button>`;
   });
 
   $("#quizContainer").append(`<div class="container question-item">
         <span class="question-number">${index + 1}</span>
         <div class="question-subject">
-              <span>${question.sectionName} </span>|<span> ${
-    question.unitName
-  }</span>
+              <span>${question.sectionName} </span>|<span> ${question.unitName
+    }</span>
             </div>
         <div class="question-head">
-          ${
-            question.image != null
-              ? "<div class='question-img'> <img src='" +
-                question.image +
-                "'> </div>"
-              : ""
-          }
+          ${question.image != null
+      ? "<div class='question-img'> <img src='" +
+      question.image +
+      "'> </div>"
+      : ""
+    }
           <div class="question-text-area">
             <div class="question-text">${question.questionText}</div>
           </div>
         </div>
-        <div class="question-stylish ${
-          question?.userAnswer == null ? "null" : ""
-        } btn-group-vertical">
+        <div class="question-stylish ${question?.userAnswer == null ? "null" : ""
+    } btn-group-vertical">
             ${stylishHTMLElement}
         </div>
       </div>`);
@@ -236,12 +228,10 @@ function submit() {
   let activeButton;
   let date = new Date();
 
-  let dateText = `${date.getFullYear()}-${
-    date.getMonth() + 1
-  }-${date.getDate()} ${date.getHours()}:${
-    date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()
-  }`;
-  let userAnalysis = JSON.parse(sessionStorage.getItem("userAnalysis"));
+  let dateText = `${date.getFullYear()}-${date.getMonth() + 1
+    }-${date.getDate()} ${date.getHours()}:${date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()
+    }`;
+  let userAnalysis = JSON.parse(sessionStorage.getItem("userAnalysis")) || [];
   let userAnalysisIndex;
   $("#quizContainer")
     .children()
@@ -250,6 +240,7 @@ function submit() {
       activeButton = Array.from(question.children).filter((chapter) =>
         chapter.classList.contains("active")
       )[0];
+
 
       userAnalysisIndex = userAnalysis.findIndex((analysis) => {
         return analysis.questionID === questions[index].questionID;
@@ -293,9 +284,11 @@ function submit() {
   sessionStorage.removeItem("quiz");
   sessionStorage.removeItem("questions");
   $.post("/quiz/insert", quiz, function (result) {
-    userAnalysis.forEach((analysis) => {
-      $.post("/quiz/updateUserAnalysis", analysis, function (result) {});
-    });
+    if (quiz.quizTypeID == 2) {
+      userAnalysis.forEach((analysis) => {
+        $.post("/quiz/updateUserAnalysis", analysis, function (result) { });
+      });
+    }
 
     location.replace("/quiz/view/" + result.quizID); //Sınavdan sonra sonuçların hemen gözükmesi için
   });
