@@ -24,24 +24,19 @@ $(document).ready(function () {
                                 <p>${this.unitName}</p>
                             </td>
                             <td class="question-confirmed text-center">
-                            <input class="form-check-input questionConfirm" type="checkbox" value="${
-                              this.questionID
-                            }" ${this?.isConfirmed ? "checked" : ""} ${
-          USERLOGDATA().userTypeID == 2 ? "" : "disabled"
+                            <input class="form-check-input questionConfirm" type="checkbox" value="${this.questionID
+        }" ${this?.isConfirmed ? "checked" : ""} ${USERLOGDATA().userTypeID == 2 ? "" : "disabled"
         }>
                             </td>
                             <td class="actions text-end">
-                                <a href="#" onclick="openViewModal('${
-                                  this.questionID
-                                }', 'view')" class="view" data-toggle="tooltip" title=""
+                                <a href="#" onclick="openViewModal('${this.questionID
+        }', 'view')" class="view" data-toggle="tooltip" title=""
                                     data-original-title="view"><i class="bi bi-eye-fill"></i></a>
-                                <a href="#" onclick="openViewModal('${
-                                  this.questionID
-                                }', 'edit')" class="edit" data-toggle="tooltip" title="" data-original-title="Edit"><i
+                                <a href="#" onclick="openViewModal('${this.questionID
+        }', 'edit')" class="edit" data-toggle="tooltip" title="" data-original-title="Edit"><i
                                         class="bi bi-pencil-fill"></i></a>
-                                <a href="#" onclick="openViewModal('${
-                                  this.questionID
-                                }', 'remove')" class="text-danger" data-toggle="tooltip" title=""
+                                <a href="#" onclick="openViewModal('${this.questionID
+        }', 'remove')" class="text-danger" data-toggle="tooltip" title=""
                                     data-original-title="Delete"><i class="bi bi-trash3-fill"></i></a>
                             </td>
                         </tr>
@@ -59,7 +54,7 @@ $(document).ready(function () {
           questionID: this.value,
           isConfirmed: this.checked,
         },
-        function (result) {}
+        function (result) { }
       );
     });
   });
@@ -71,14 +66,16 @@ function openViewModal(questionID, modalType) {
   });
 }
 function setViewModal(question, modalType) {
+
+  console.log(question[0]);
   let isDisabled = modalType == "view" || modalType == "remove" ? true : false;
   $("#btnSubmitQuestion").attr(
     "onClick",
     "submitQuestion(" +
-      question[0].questionID[0] +
-      ",'" +
-      (modalType == "edit" ? "edit" : "view") +
-      "')"
+    question[0].questionID[0] +
+    ",'" +
+    (modalType == "edit" ? "edit" : "view") +
+    "')"
   );
   $("#btnDeleteQuestion").attr(
     "onClick",
@@ -87,14 +84,17 @@ function setViewModal(question, modalType) {
   $("#questionText").val(question[0].questionText).attr("disabled", isDisabled);
   if (question[0].image != null)
     $("#questionImg").css("background-image", "url(" + question[0].image + ")");
+  else
+    $("#questionImg").css("background-image", "none");
+
   $("#section").children().remove();
   sections.forEach((section) => {
     $("#section").append(
       '<option value="' +
-        section.sectionID +
-        '">' +
-        section.sectionName +
-        "</option>"
+      section.sectionID +
+      '">' +
+      section.sectionName +
+      "</option>"
     );
   });
   $("#section")
