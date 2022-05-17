@@ -25,7 +25,13 @@ router.post("/setPassword", (req, res) => {
       res.end();
     });
 });
+router.post("/mailControl", (req, res) => {
+  userController.mailControl(req.body.mail).then((result) => {
+    res.send(result);
+    res.end();
+  });
 
+});
 router.post("/forget", (res, req) => {
   const transpoter = nodemailer.createTransport({
     service: "gmail",
@@ -38,18 +44,18 @@ router.post("/forget", (res, req) => {
   const mailOptions = {
     from: "sinavsistemi2022@gmail.com",
     to: res.body.mail,
-    subject: "Sidar ilaslan tarafından gönderildi",
+    subject: "Sınav Sistemi tarafından gönderildi",
     text: `Şifremi unuttum Kodu: ${code}`,
   };
 
   transpoter.sendMail(mailOptions, (err, info) => {
     if (err) {
       req.send(false);
-      req.end();
     } else {
       req.send(`${code}`);
-      req.end();
     }
+    req.end();
+
   });
 });
 

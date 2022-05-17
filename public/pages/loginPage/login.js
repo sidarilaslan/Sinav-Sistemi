@@ -29,6 +29,7 @@ function login(data) {
       localStorage.setItem("user", JSON.stringify(result));
       location.replace("./public/pages/profilePage/profile.html");
     } else {
+
       alert("Mail veya şifre yanlış");
       clean();
     }
@@ -38,23 +39,30 @@ function sendMailSubmit() {
   let data = {
     mail: $("#resetMail").val(),
   };
+  $.post("/mailControl", data, function (result) {
+    if (result) {
+      sendMail(data);
+    } else {
+      alert("Girilen mail kayıtlı değil");
+      clean();
+    }
 
-  sendMail(data);
+  });
 }
+
 function sendMail(data) {
-  alert("Sıfırlama kodu gönderiliyor.");
   $("#sendMailCodeButton").prop("disabled", true);
   $.post("/forget", data, function (result) {
     if (result) {
       $("#emailCode").prop("disabled", false);
       $("#resetMail").prop("disabled", false);
       $("#checkMailCodeButton").removeClass("d-none");
-      alert(`test: code-> ${result}`);
+      // alert(`test: code-> ${result}`); //test
       mailCode = result;
     } else {
       $("#sendMailCodeButton").prop("disabled", false);
 
-      alert("Yanlıs formatta mail girdiniz ");
+      alert("mail gönderilemedi");
     }
   });
 }

@@ -5,9 +5,8 @@ async function getUsers() {
   return await x.query("SELECT * FROM tblUsers").then((result) => {
     result.recordset.forEach((question) => {
       if (question.image != null)
-        question.image = `data:${
-          question.imageMimeType
-        };base64,${question.image.toString("base64")}`;
+        question.image = `data:${question.imageMimeType
+          };base64,${question.image.toString("base64")}`;
     });
     return result.recordset;
   });
@@ -19,9 +18,8 @@ async function getUser(key, value) {
     .query(`SELECT * FROM tblUsers where ${key}='${value}'`)
     .then((result) => {
       if (result.recordset[0].image != null)
-        result.recordset[0].image = `data:${
-          result.recordset[0].imageMimeType
-        };base64,${result.recordset[0].image.toString("base64")}`;
+        result.recordset[0].image = `data:${result.recordset[0].imageMimeType
+          };base64,${result.recordset[0].image.toString("base64")}`;
       return result.recordset[0];
     });
 }
@@ -33,9 +31,8 @@ async function searchUser(mail, password) {
     )
     .then((result) => {
       if (result.recordset[0]?.image != null)
-        result.recordset[0].image = `data:${
-          result.recordset[0].imageMimeType
-        };base64,${result.recordset[0].image.toString("base64")}`;
+        result.recordset[0].image = `data:${result.recordset[0].imageMimeType
+          };base64,${result.recordset[0].image.toString("base64")}`;
       return result.recordset[0];
     });
 }
@@ -47,12 +44,10 @@ async function insertUser(user, image) {
       : db
     )
       .query(
-        `Insert into tblUsers OUTPUT Inserted.userID values('${user.name}','${
-          user.surName
-        }', '${user.mail}','${user.password}',${user.userTypeID},'${
-          user.tcNO
+        `Insert into tblUsers OUTPUT Inserted.userID values('${user.name}','${user.surName
+        }', '${user.mail}','${user.password}',${user.userTypeID},'${user.tcNO
         }','${JSON.stringify(user.settings)}', ` +
-          (isThereUploadedImg ? `'${image?.mimetype}',@img)` : "NULL,NULL)")
+        (isThereUploadedImg ? `'${image?.mimetype}',@img)` : "NULL,NULL)")
       )
       .then((result) => {
         return { userId: result.recordset[0].userID };
@@ -67,10 +62,10 @@ async function updateUser(user, image) {
       : db
     ).query(
       `Update tblUsers set name='${user.name}', surname='${user.surName}', mail='${user.mail}', password='${user.password}', userTypeID=${user.userTypeID}, tcNO='${user.tcNO}'` +
-        (isThereUploadedImg
-          ? `, imageMimeType='${image?.mimetype}', image=@img `
-          : " ") +
-        `where userID=${user.userID}`
+      (isThereUploadedImg
+        ? `, imageMimeType='${image?.mimetype}', image=@img `
+        : " ") +
+      `where userID=${user.userID}`
     );
   });
 }
@@ -82,10 +77,10 @@ async function updateUserProfile(user, image) {
       : db
     ).query(
       `Update tblUsers set password='${user.password}'` +
-        (isThereUploadedImg
-          ? `, imageMimeType='${image?.mimetype}', image=@img `
-          : " ") +
-        `where userID=${user.userID}`
+      (isThereUploadedImg
+        ? `, imageMimeType='${image?.mimetype}', image=@img `
+        : " ") +
+      `where userID=${user.userID}`
     );
   });
 }
@@ -104,6 +99,14 @@ async function updatePassword(mail, password) {
     )
   ).recordset;
 }
+async function mailControl(mail) {
+  let x = await connectDB();
+  return (
+    await x.query(
+      `SELECT * FROM tblUsers WHERE mail = '${mail}'`
+    )
+  ).recordset[0];
+}
 async function deleteUser(userID) {
   let x = await connectDB();
   return (await x.query(`Delete from tblUsers where userID = ${userID}`))
@@ -120,4 +123,5 @@ module.exports = {
   updatePassword,
   updateUserProfile,
   updateUserSettings,
+  mailControl
 };
