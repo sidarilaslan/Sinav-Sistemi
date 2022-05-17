@@ -30,6 +30,13 @@
   overflow: auto;
 }
 
+.body .user-report .print-btn {
+  position: fixed;
+  bottom: 10px;
+  right: 4%;
+  padding: 5px 30px;
+}
+
 .body .user-report .report-item {
   margin: 10px 0;
   width: 100%;
@@ -146,5 +153,11 @@
 .mb-0,
 .my-0 {
   margin-bottom: 0 !important;
+}
+
+@media print {
+  .noPrint {
+    display: none;
+  }
 }
 /*# sourceMappingURL=report.css.map */
