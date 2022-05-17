@@ -149,4 +149,14 @@ $base-background-image-color-horizontal: linear-gradient(90deg,
   .noPrint {
     display: none;
   }
+
+  .body {
+    height: 100%;
+    overflow: unset;
+  }
+
+  .table-responsive {
+    overflow: unset;
+  }
+
 }

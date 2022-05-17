@@ -67,7 +67,6 @@ function openViewModal(questionID, modalType) {
 }
 function setViewModal(question, modalType) {
 
-  console.log(question[0]);
   let isDisabled = modalType == "view" || modalType == "remove" ? true : false;
   $("#btnSubmitQuestion").attr(
     "onClick",

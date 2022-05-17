@@ -1,15 +1,12 @@
 $base-color1: #8281d8;
 $base-color2: #80c6f6;
-$base-background-image-color-vertical: linear-gradient(
-  180deg,
-  $base-color1 0%,
-  $base-color2 99%
-);
-$base-background-image-color-horizontal: linear-gradient(
-  90deg,
-  $base-color1 0%,
-  $base-color2 99%
-);
+$base-background-image-color-vertical: linear-gradient(180deg,
+    $base-color1 0%,
+    $base-color2 99%);
+$base-background-image-color-horizontal: linear-gradient(90deg,
+    $base-color1 0%,
+    $base-color2 99%);
+
 .body {
   position: relative;
 
@@ -22,7 +19,7 @@ $base-background-image-color-horizontal: linear-gradient(
 
     .container-fluid {
       background-color: white;
-      max-height: 50%;
+      max-height: 80%;
       width: 80%;
       overflow-y: auto;
       box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
@@ -34,6 +31,7 @@ $base-background-image-color-horizontal: linear-gradient(
               .view {
                 color: $base-color1;
               }
+
               .edit {
                 color: $base-color2;
               }
@@ -53,6 +51,7 @@ $base-background-image-color-horizontal: linear-gradient(
     height: 100%;
     width: 100%;
     background-color: #00000030;
+
     .question-body {
       width: 100%;
 

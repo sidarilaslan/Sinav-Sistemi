@@ -80,8 +80,10 @@ function setViewModal(user, modalType) {
   $("#userMail").val(user.mail).attr("disabled", isDisabled);
   $("#userPassword").val(user.password).attr("disabled", isDisabled);
   $("#userTC").val(user.tcNO).attr("disabled", isDisabled);
-  $("#userType" + user.userTypeID).addClass("active");
   $("#userType").children().attr("disabled", isDisabled);
+  $("#userType").children().removeClass("active");
+  $("#userType" + user.userTypeID).addClass("active");
+
   if (user.image != null)
     $("#userImg").css("background-image", "url(" + user.image + ")");
 
@@ -109,7 +111,6 @@ function submitViewModal(modalType, userID) {
     editUser(user);
     toggleUserViewModal();
   }
-  $("#userType").children().removeClass("active");
 }
 function editUser(user) {
   let formData = new FormData();
