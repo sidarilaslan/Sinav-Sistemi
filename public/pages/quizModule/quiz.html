@@ -1,36 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Giriş Yap</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="/public/src/css/bootstrap.min.css" rel="stylesheet" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sınav</title>
 
-    <link href="/public/pages/quizModule/quiz.css" rel="stylesheet" />
-  </head>
+  <!-- Bootstrap core CSS -->
+  <link href="/public/src/css/bootstrap.min.css" rel="stylesheet" />
 
-  <body class="text-center">
-    <div class="main-container container">
-      <div class="header">
-        <h3 id="headerText">Aşağıdaki soruları cevaplayınız.</h3>
-        <p id="headerSubText">
-          Süre bitiminde sınav otomatik olarak gönderilecektir.
-        </p>
-        <div id="timer" class="timer" data-seconds-left></div>
-      </div>
-      <div id="quizContainer" class="container quiz-container"></div>
-      <div id="footer" class="footer">
-        <button id="submitButton" onclick="submit()" class="btn btn-primary">
-          Sınavı Bitir
-        </button>
-      </div>
+  <link href="/public/pages/quizModule/quiz.css" rel="stylesheet" />
+</head>
+
+<body class="text-center">
+  <div class="main-container container">
+    <div class="header">
+      <h3 id="headerText">Aşağıdaki soruları cevaplayınız.</h3>
+      <p id="headerSubText">
+        Süre bitiminde sınav otomatik olarak gönderilecektir.
+      </p>
+      <div id="timer" class="timer" data-seconds-left></div>
     </div>
+    <div id="quizContainer" class="container quiz-container"></div>
+    <div id="footer" class="footer">
+      <button id="submitButton" onclick="submit()" class="btn btn-primary">
+        Sınavı Bitir
+      </button>
+    </div>
+  </div>
 
-    <script src="/public/src/js/jquery-3.6.0.min.js"></script>
-    <script src="/public/pages/quizModule/jquery.simple.timer.js"></script>
-    <script src="/public/src/js/main.js"></script>
-    <script src="/public/pages/quizModule/quiz.js"></script>
-  </body>
+  <script src="/public/src/js/jquery-3.6.0.min.js"></script>
+  <script src="/public/pages/quizModule/jquery.simple.timer.js"></script>
+  <script src="/public/src/js/main.js"></script>
+  <script src="/public/pages/quizModule/quiz.js"></script>
+</body>
+
 </html>

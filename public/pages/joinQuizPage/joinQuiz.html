@@ -1,82 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ana Sayfa</title>
 
-    <link href="../../src/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../../src/css/navbar.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
-    />
-    <link rel="stylesheet" href="joinQuiz.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sınava Gir</title>
 
-  <body>
-    <nav class="col-md-2" id="nav-placeholder"></nav>
-    <div class="col-md-10 body">
-      <div class="card">
-        <div class="card-body text-center">
-          <h5 class="card-title">Konu tarama testi</h5>
-          <p class="card-text">
-            Kendini geliştirmek istediğin konu sorularını çöz ve kendini
-            geliştir.
-          </p>
-          <select
-            id="sectionsSelect"
-            class="form-select mb-3"
-            aria-label="Konu Secin"
-          >
-            <option selected>Konu Seçin</option>
-          </select>
-          <button
-            id="sectionQuizButton"
-            disabled
-            onclick="sectionQuizSubmit()"
-            class="btn btn-primary w-100"
-          >
-            Konu Tarama Testi
-          </button>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-body text-center">
-          <h5 class="card-title">Sınava gir</h5>
-          <p class="card-text">
-            Dikkat! Sınava gir butonuna bastıktan sonra geri dönüş yoktur.<br />(Test
-            sürümü olduğu için geri dönüş vardır.)
-          </p>
-          <a href="/quiz/quiz" target="_blank" class="btn btn-primary w-100"
-            >Sınava Başla</a
-          >
-        </div>
+  <link href="../../src/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../../src/css/navbar.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="joinQuiz.css" />
+</head>
+
+<body>
+  <nav class="col-md-2" id="nav-placeholder"></nav>
+  <div class="col-md-10 body">
+    <div class="card">
+      <div class="card-body text-center">
+        <h5 class="card-title">Konu tarama testi</h5>
+        <p class="card-text">
+          Kendini geliştirmek istediğin konu sorularını çöz ve kendini
+          geliştir.
+        </p>
+        <select id="sectionsSelect" class="form-select mb-3" aria-label="Konu Secin">
+          <option selected>Konu Seçin</option>
+        </select>
+        <button id="sectionQuizButton" disabled onclick="sectionQuizSubmit()" class="btn btn-primary w-100">
+          Konu Tarama Testi
+        </button>
       </div>
     </div>
+    <div class="card">
+      <div class="card-body text-center">
+        <h5 class="card-title">Sınava gir</h5>
+        <p class="card-text">
+          Dikkat! Sınava gir butonuna bastıktan sonra geri dönüş yoktur.<br />(Test
+          sürümü olduğu için geri dönüş vardır.)
+        </p>
+        <a href="/quiz/quiz" target="_blank" class="btn btn-primary w-100">Sınava Başla</a>
+      </div>
+    </div>
+  </div>
 
-    <script src="/public/src/js/jquery-3.6.0.min.js"></script>
-    <script src="/public/src/js/main.js"></script>
+  <script src="/public/src/js/jquery-3.6.0.min.js"></script>
+  <script src="/public/src/js/main.js"></script>
 
-    <script>
-      $(function () {
-        $("#nav-placeholder").load(
-          "../../src/Components/navbarComponent.html",
-          function () {
-            $("#nav-placeholder")
-              .addClass("permission-" + USERLOGDATA().userTypeID)
-              .children()
-              .find(".list-item")
-              .filter(":contains('Sınava Gir')")
-              .addClass("active");
-            if (USERLOGDATA().image)
-              $("#navbarProfileImage").attr("src", USERLOGDATA().image);
-            $("#name").text(USERLOGDATA().name + " " + USERLOGDATA().surname);
-          }
-        );
-      });
-    </script>
-    <script src="joinQuiz.js"></script>
-  </body>
+  <script>
+    $(function () {
+      $("#nav-placeholder").load(
+        "../../src/Components/navbarComponent.html",
+        function () {
+          $("#nav-placeholder")
+            .addClass("permission-" + USERLOGDATA().userTypeID)
+            .children()
+            .find(".list-item")
+            .filter(":contains('Sınava Gir')")
+            .addClass("active");
+          if (USERLOGDATA().image)
+            $("#navbarProfileImage").attr("src", USERLOGDATA().image);
+          $("#name").text(USERLOGDATA().name + " " + USERLOGDATA().surname);
+        }
+      );
+    });
+  </script>
+  <script src="joinQuiz.js"></script>
+</body>
+
 </html>
