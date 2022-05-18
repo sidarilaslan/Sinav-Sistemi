@@ -6,7 +6,7 @@
 ## Kurulum
 
 - Github reposunu Klonla
-- db adlı klasör içindekileri mssql'e ekle 
+- databaseFile adlı klasör içindekileri mssql'e ekle 
 -  Sql server configuration manager dan SQL Server Network Configuration-> Protocols for MSSQLSERVER  TCP/IP aktif et
 - Proje ana dizininde ``` npm install ``` komutunu çalıştır
 - Proje ana dizininde  ``` npm start``` komutunu çalıştır
